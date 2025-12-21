@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AC44E8F42EF7D7180017BE8F /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = AC44E8F32EF7D7180017BE8F /* Cloudinary */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E5FEB6A72EE9439300A437C5 /* Signin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Signin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC44E8F42EF7D7180017BE8F /* Cloudinary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = Signin;
 			packageProductDependencies = (
+				AC44E8F32EF7D7180017BE8F /* Cloudinary */,
 			);
 			productName = Signin;
 			productReference = E5FEB6A72EE9439300A437C5 /* Signin.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = E5FEB69E2EE9439300A437C5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E5FEB6A82EE9439300A437C5 /* Products */;
 			projectDirPath = "";
@@ -333,6 +342,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC44E8F32EF7D7180017BE8F /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E5FEB69F2EE9439300A437C5 /* Project object */;
 }

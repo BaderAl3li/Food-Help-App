@@ -6,20 +6,21 @@
 //
 
 import UIKit
+import Cloudinary
 
 class ViewController: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+        
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.performSegue(withIdentifier: "goNext", sender: self)
-        }
     }
 
 
