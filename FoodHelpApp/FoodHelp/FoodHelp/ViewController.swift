@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Cloudinary
+import SDWebImage
 
 class ViewController: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

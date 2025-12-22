@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CBB6C39E2EF93C8100202683 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = CBB6C39D2EF93C8100202683 /* Cloudinary */; };
+		CBB6C3A12EF93D0400202683 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CBB6C3A02EF93D0400202683 /* SDWebImage */; };
+		CBB6C3A32EF93D0400202683 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CBB6C3A22EF93D0400202683 /* SDWebImageMapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		66A664E52EE93F06004C65ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB6C3A12EF93D0400202683 /* SDWebImage in Frameworks */,
+				CBB6C3A32EF93D0400202683 /* SDWebImageMapKit in Frameworks */,
+				CBB6C39E2EF93C8100202683 /* Cloudinary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +134,9 @@
 			);
 			name = FoodHelp;
 			packageProductDependencies = (
+				CBB6C39D2EF93C8100202683 /* Cloudinary */,
+				CBB6C3A02EF93D0400202683 /* SDWebImage */,
+				CBB6C3A22EF93D0400202683 /* SDWebImageMapKit */,
 			);
 			productName = FoodHelp;
 			productReference = 66A664CE2EE93F03004C65ED /* FoodHelp.app */;
@@ -208,6 +220,10 @@
 			);
 			mainGroup = 66A664C52EE93F03004C65ED;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CBB6C39C2EF93BD100202683 /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
+				CBB6C39F2EF93D0400202683 /* XCRemoteSwiftPackageReference "sdwebimage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 66A664CF2EE93F03004C65ED /* Products */;
 			projectDirPath = "";
@@ -563,6 +579,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBB6C39C2EF93BD100202683 /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.4;
+			};
+		};
+		CBB6C39F2EF93D0400202683 /* XCRemoteSwiftPackageReference "sdwebimage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sdwebimage/sdwebimage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBB6C39D2EF93C8100202683 /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB6C39C2EF93BD100202683 /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
+		};
+		CBB6C3A02EF93D0400202683 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB6C39F2EF93D0400202683 /* XCRemoteSwiftPackageReference "sdwebimage" */;
+			productName = SDWebImage;
+		};
+		CBB6C3A22EF93D0400202683 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB6C39F2EF93D0400202683 /* XCRemoteSwiftPackageReference "sdwebimage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 66A664C62EE93F03004C65ED /* Project object */;
 }
