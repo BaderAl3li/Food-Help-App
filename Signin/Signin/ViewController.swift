@@ -8,7 +8,6 @@
 import UIKit
 import Cloudinary
 import SDWebImage
-import FirebaseAuth
 
 class ViewController: UIViewController {
     
