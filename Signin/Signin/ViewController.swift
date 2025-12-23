@@ -13,6 +13,19 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBAction func signoutClicked(_ sender: UIButton) {
+        let alert = UIAlertController(
+            title: "Are you sure?",
+            message: "Logging out requires you to sign in again. Are you sure you want to log out from your account?",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive)) //{_ in
+            
+        //}
+        present(alert, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
