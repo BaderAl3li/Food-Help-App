@@ -8,22 +8,34 @@
 import UIKit
 import Cloudinary
 import SDWebImage
+import FirebaseFirestore
 
+final class CurrentRecurringDonationVC: UIViewController {
 
-class ViewController: UIViewController {
+    @IBOutlet weak var dailyDonationInfoLabel: UILabel!
+    @IBOutlet weak var scheduleInfoLabel: UILabel!
+    @IBOutlet weak var nextPickupsInfoLabel: UILabel!
 
-    @IBOutlet weak var call_logo: UIImageView!
+    private var listener: ListenerRegistration?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let call_logo = call_logo else {return}
-        guard let url = URL (string: "https://res.cloudinary.com/daeudw63f/image/upload/v1766392780/image_10_jzg2fr.png")
-        else {print("bad url")
-            return
+
+        listener = try? RecurringDonationStore().listen { [weak self] donation in
+            guard let self = self else { return }
+
+            guard let d = donation else {
+                self.dailyDonationInfoLabel.text = "No donation yet"
+                self.scheduleInfoLabel.text = "-"
+                self.nextPickupsInfoLabel.text = "-"
+                return
+            }
+
+            self.dailyDonationInfoLabel.text = "\(d.foodType) x\(d.quantity)"
+            self.scheduleInfoLabel.text = "\(d.scheduleInterval) @ \(d.scheduleTime)"
+            self.nextPickupsInfoLabel.text = "Status: \(d.status)"
         }
-        call_logo.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
-                                    // Do any additional setup after loading the view.
     }
 
-
+    deinit { listener?.remove() }
 }
-
