@@ -8,10 +8,13 @@
 import UIKit
 import Cloudinary
 import SDWebImage
+import FirebaseCore
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
+    
     
     @IBAction func signoutClicked(_ sender: UIButton) {
         let alert = UIAlertController(
