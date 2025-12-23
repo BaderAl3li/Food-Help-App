@@ -6,8 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0A704FA0A3339B2866FFC1C2 /* Pods_FoodHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893008F9D1A650B4C78E844F /* Pods_FoodHelper.framework */; };
+		A00B41752EFA922D00CFE3B5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A00B41742EFA922D00CFE3B5 /* FirebaseAuth */; };
+		A00B41772EFA922D00CFE3B5 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A00B41762EFA922D00CFE3B5 /* FirebaseCore */; };
+		A00B41792EFA922D00CFE3B5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A00B41782EFA922D00CFE3B5 /* FirebaseFirestore */; };
+		A00B417B2EFA92BE00CFE3B5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A00B417A2EFA92BE00CFE3B5 /* FirebaseStorage */; };
+		A0919A562EF5C903007A67D0 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0919A552EF5C903007A67D0 /* FirebaseAnalytics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		893008F9D1A650B4C78E844F /* Pods_FoodHelper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodHelper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0BE0BAC2EEE34830011852E /* FoodHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B307890C294D3E9368A5B4C2 /* Pods-FoodHelper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodHelper.debug.xcconfig"; path = "Target Support Files/Pods-FoodHelper/Pods-FoodHelper.debug.xcconfig"; sourceTree = "<group>"; };
+		BAC85DB8888CD7B6465C6ACF /* Pods-FoodHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodHelper.release.xcconfig"; path = "Target Support Files/Pods-FoodHelper/Pods-FoodHelper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,17 +48,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0919A562EF5C903007A67D0 /* FirebaseAnalytics in Frameworks */,
+				A00B41792EFA922D00CFE3B5 /* FirebaseFirestore in Frameworks */,
+				A00B41772EFA922D00CFE3B5 /* FirebaseCore in Frameworks */,
+				A00B417B2EFA92BE00CFE3B5 /* FirebaseStorage in Frameworks */,
+				A00B41752EFA922D00CFE3B5 /* FirebaseAuth in Frameworks */,
+				0A704FA0A3339B2866FFC1C2 /* Pods_FoodHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35B0146E59F93A52FE561BB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				893008F9D1A650B4C78E844F /* Pods_FoodHelper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37BB807F4F9141BD77E75B60 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B307890C294D3E9368A5B4C2 /* Pods-FoodHelper.debug.xcconfig */,
+				BAC85DB8888CD7B6465C6ACF /* Pods-FoodHelper.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		A0BE0BA32EEE34830011852E = {
 			isa = PBXGroup;
 			children = (
 				A0BE0BAE2EEE34830011852E /* FoodHelper */,
 				A0BE0BAD2EEE34830011852E /* Products */,
+				37BB807F4F9141BD77E75B60 /* Pods */,
+				35B0146E59F93A52FE561BB9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,9 +103,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0BE0BBF2EEE34850011852E /* Build configuration list for PBXNativeTarget "FoodHelper" */;
 			buildPhases = (
+				AC808A89007CAF3828FC6E41 /* [CP] Check Pods Manifest.lock */,
 				A0BE0BA82EEE34830011852E /* Sources */,
 				A0BE0BA92EEE34830011852E /* Frameworks */,
 				A0BE0BAA2EEE34830011852E /* Resources */,
+				FC2C8DE70422CCC92AF4319B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -78,6 +118,11 @@
 			);
 			name = FoodHelper;
 			packageProductDependencies = (
+				A0919A552EF5C903007A67D0 /* FirebaseAnalytics */,
+				A00B41742EFA922D00CFE3B5 /* FirebaseAuth */,
+				A00B41762EFA922D00CFE3B5 /* FirebaseCore */,
+				A00B41782EFA922D00CFE3B5 /* FirebaseFirestore */,
+				A00B417A2EFA92BE00CFE3B5 /* FirebaseStorage */,
 			);
 			productName = FoodHelper;
 			productReference = A0BE0BAC2EEE34830011852E /* FoodHelper.app */;
@@ -107,6 +152,9 @@
 			);
 			mainGroup = A0BE0BA32EEE34830011852E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A0BE0BAD2EEE34830011852E /* Products */;
 			projectDirPath = "";
@@ -127,6 +175,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AC808A89007CAF3828FC6E41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FoodHelper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC2C8DE70422CCC92AF4319B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodHelper/Pods-FoodHelper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FoodHelper/Pods-FoodHelper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FoodHelper/Pods-FoodHelper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A0BE0BA82EEE34830011852E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,6 +230,7 @@
 /* Begin XCBuildConfiguration section */
 		A0BE0BC02EEE34850011852E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B307890C294D3E9368A5B4C2 /* Pods-FoodHelper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -167,6 +258,7 @@
 		};
 		A0BE0BC12EEE34850011852E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BAC85DB8888CD7B6465C6ACF /* Pods-FoodHelper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -333,6 +425,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A00B41742EFA922D00CFE3B5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A00B41762EFA922D00CFE3B5 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A00B41782EFA922D00CFE3B5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		A00B417A2EFA92BE00CFE3B5 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		A0919A552EF5C903007A67D0 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0919A542EF5C903007A67D0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A0BE0BA42EEE34830011852E /* Project object */;
 }

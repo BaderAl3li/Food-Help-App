@@ -16,6 +16,8 @@ class FoodCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     
+    var acceptAction: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        
@@ -26,12 +28,11 @@ class FoodCell: UITableViewCell {
         Card.layer.shadowOffset = CGSize(width: 0, height: 2)
         Card.layer.shadowOpacity = 0.1
         Card.layer.shadowRadius = 6
+        
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func acceptTapped(_ sender: UIButton) {
+        acceptAction?()
     }
-
+}
 }
