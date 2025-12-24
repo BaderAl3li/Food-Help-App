@@ -27,7 +27,7 @@ import FirebaseFirestore
         
         
         override func viewDidLoad() {
-            print("👀 Current screen loaded, uid:", Auth.auth().currentUser?.uid ?? "nil")
+            print("Current screen loaded, uid:", Auth.auth().currentUser?.uid ?? "nil")
             super.viewDidLoad()
             quantityField.keyboardType = .numberPad
             loadIfEditing()
@@ -36,12 +36,12 @@ import FirebaseFirestore
 
         @IBAction func finishTapped(_ sender: UIButton) {
             
-            print("✅ Finish tapped")
+            print("Finish tapped")
             guard let uid = Auth.auth().currentUser?.uid else {
                 showAlert("Not signed in")
                 return
             }
-            print("✅ UID:", Auth.auth().currentUser?.uid ?? "nil")
+            print("UID:", Auth.auth().currentUser?.uid ?? "nil")
             
             let quantity = Int(quantityField.text ?? "") ?? 0
             
@@ -110,7 +110,7 @@ import FirebaseFirestore
                       let data = snapshot?.data() else { return }
                 
                 DispatchQueue.main.async {
-                    self.finishButton.setTitle("Update", for: .normal)
+                    // self.finishButton.setTitle("Update", for: .normal)
                     self.donationTypeField.text = data["donationType"] as? String
                     self.foodTypeField.text = data["foodType"] as? String
                     self.quantityField.text = "\(data["quantity"] as? Int ?? 0)"
@@ -122,7 +122,6 @@ import FirebaseFirestore
             }
         }
         
-        // MARK: - Alert helper
         private func showAlert(_ message: String, completion: (() -> Void)? = nil) {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completion?() })
