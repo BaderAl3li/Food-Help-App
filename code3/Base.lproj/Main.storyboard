@@ -11,7 +11,7 @@
         <!--Recurring donation (with info)-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="CurrentRecurringDonationVC" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,6 +25,10 @@
                                 <rect key="frame" x="10" y="-37" width="393" height="1039"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 38 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-oO-URO">
+                                <rect key="frame" x="24" y="182" width="345" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-t9-kqw">
                                 <rect key="frame" x="94" y="644" width="205" height="66"/>
@@ -46,34 +50,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 38 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="Pfg-oO-URO">
-                                <rect key="frame" x="24" y="182" width="345" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 38 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="thg-xu-fdT">
-                                <rect key="frame" x="24" y="330" width="345" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Daily Donation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWP-Jg-VEY">
                                 <rect key="frame" x="150" y="197" width="111" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aF3-ho-Mn9">
-                                <rect key="frame" x="170" y="344" width="71" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 38 (1)" translatesAutoresizingMaskIntoConstraints="NO" id="MQv-P7-A1O">
-                                <rect key="frame" x="24" y="478" width="345" height="140"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next pickups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjR-Ut-u4q">
-                                <rect key="frame" x="156" y="490" width="100" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -121,27 +99,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Profile" title=""/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="{{Info}}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-dt-BoN">
-                                <rect key="frame" x="179" y="519" width="53" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="{{Info}}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWr-qo-2U2">
-                                <rect key="frame" x="179" y="226" width="53" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="{{Info}}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwo-hW-3aD">
-                                <rect key="frame" x="180" y="373" width="53" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXW-YX-rag">
                                 <rect key="frame" x="82" y="708" width="228" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,14 +108,27 @@
                                     <segue destination="TYZ-nQ-oAU" kind="showDetail" id="9RB-MH-G4m"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="{{}}" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWr-qo-2U2">
+                                <rect key="frame" x="24" y="496" width="362" height="307"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lWr-qo-2U2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="P3s-sW-cCX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lWr-qo-2U2" secondAttribute="trailing" constant="16" id="vkP-pv-kCC"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="infoLabel" destination="lWr-qo-2U2" id="ciI-24-5j6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-801" y="-311"/>
+            <point key="canvasLocation" x="-802.29007633587787" y="-311.26760563380282"/>
         </scene>
         <!--Recurring donation (no info)-->
         <scene sceneID="OLK-3g-MPE">
@@ -280,7 +250,7 @@
         <!--Create recurring-->
         <scene sceneID="bud-4w-M1F">
             <objects>
-                <viewController title="Create recurring" modalPresentationStyle="fullScreen" id="TYZ-nQ-oAU" customClass="ViewController" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Create recurring" modalPresentationStyle="fullScreen" id="TYZ-nQ-oAU" customClass="CreateRecurringDonationVC" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8lJ-Yj-qPa">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -377,6 +347,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (3)"/>
                                 <connections>
+                                    <action selector="finishTapped:" destination="TYZ-nQ-oAU" eventType="touchUpInside" id="Zzb-bW-vIq"/>
                                     <segue destination="BYZ-38-t0r" kind="showDetail" id="d5P-6S-6Dd"/>
                                 </connections>
                             </button>
@@ -449,6 +420,16 @@
                         <viewLayoutGuide key="safeArea" id="KVO-lQ-JtL"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="deliveryCompanyField" destination="XgU-MK-Ze6" id="KkY-no-Flw"/>
+                        <outlet property="donationTypeField" destination="UZM-vj-0bK" id="x08-0Z-fLq"/>
+                        <outlet property="finishButton" destination="Jad-Or-Nwv" id="ElS-Gh-cPJ"/>
+                        <outlet property="foodTypeField" destination="c0t-Ny-7tF" id="5bT-vx-Eef"/>
+                        <outlet property="preferredCharityField" destination="TIN-n2-WL4" id="3xN-lL-BZB"/>
+                        <outlet property="quantityField" destination="NVR-qj-fu6" id="Kmi-vL-1W8"/>
+                        <outlet property="scheduleIntervalField" destination="dLs-3r-JyN" id="1dI-F5-Vad"/>
+                        <outlet property="scheduleTimeField" destination="kiL-aP-tGe" id="f60-sP-GRn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fcc-sq-hzc" sceneMemberID="firstResponder"/>
             </objects>
