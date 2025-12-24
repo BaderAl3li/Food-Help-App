@@ -21,7 +21,7 @@ class NGOHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Back.layer.cornerRadius=20
+       
         
         WelcomeCard.layer.cornerRadius=20
         WelcomeCard.layer.borderColor=UIColor.purple.cgColor

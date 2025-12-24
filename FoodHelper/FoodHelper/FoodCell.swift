@@ -35,4 +35,4 @@ class FoodCell: UITableViewCell {
         acceptAction?()
     }
 }
-}
+

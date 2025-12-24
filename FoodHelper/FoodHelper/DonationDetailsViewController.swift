@@ -16,7 +16,6 @@ class DonationDetailsViewController: UIViewController {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var foodImage: UIImageView!
     
-    @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -95,7 +94,4 @@ class DonationDetailsViewController: UIViewController {
            }
        }
 
-       @IBAction func declineTapped(_ sender: UIButton) {
-           navigationController?.popViewController(animated: true)
-       }
    }
