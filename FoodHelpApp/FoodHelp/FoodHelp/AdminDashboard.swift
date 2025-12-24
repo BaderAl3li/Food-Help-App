@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import FirebaseFirestore
+
+
+
 
 class AdminDashboard: UIViewController {
+    @IBOutlet weak var notificationBadgeLabel: UILabel!
     @IBOutlet weak var appLogo: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,5 +21,14 @@ class AdminDashboard: UIViewController {
             return
         }
         appLogo.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+        
+        Firestore.firestore()
+                    .collection("users")
+                    .whereField("status", isEqualTo: "pending")
+                    .addSnapshotListener { snapshot, _ in
+                        let count = snapshot?.documents.count ?? 0
+                        self.notificationBadgeLabel.text = "\(count)"
+                        self.notificationBadgeLabel.isHidden = count == 0
+                    }
     }
 }
