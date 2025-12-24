@@ -9,20 +9,15 @@ import UIKit
 import FirebaseAuth
 import Cloudinary
 import SDWebImage
+import FirebaseFirestore
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    func showAlert(title: String, message: String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-
-    
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    private let db = Firestore.firestore()
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         guard let email = emailTextField.text, !email.isEmpty else{
@@ -35,16 +30,55 @@ class LoginViewController: UIViewController {
             return
         }
         
+        
         Auth.auth().signIn(withEmail: email, password: password){
             [weak self] authResult, error in
             if let error = error {
                 self?.showAlert(title: "Login Failed", message: error.localizedDescription)
                 return
             }
-            self?.performSegue(withIdentifier: "Home", sender: sender)
+            guard let uid = authResult?.user.uid else{
+                self?.showAlert(title: "Login Failed", message: "User does not exits")
+                return
+            }
+            
+            self?.db.collection("users").document(uid).getDocument{[weak self] snap, error in
+                guard let self = self else {return}
+                if let error = error{
+                    self.showAlert(title: "Error", message: "Could not load role")
+                    return
+                }
+                guard let data = snap?.data(),
+                      let role = (data["role"] as? String)?.lowercased() else{
+                    self.showAlert(title: "Missing Alert", message: "This account has no role")
+                    return
+                }
+                switch role{
+                case "donor":
+                    self.performSegue(withIdentifier: "Home", sender: sender)
+                    
+                case "ngo":
+                    self.performSegue(withIdentifier: "NGOHome", sender: sender)
+                
+                case "admin":
+                    self.performSegue(withIdentifier: "AdminHome", sender: sender)
+                
+                default:
+                    self.showAlert(title: "Unknown Role", message: "Role does not exist")
+                }
+            }
+            
             
         }
     }
+    
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
