@@ -31,8 +31,6 @@ class DonationDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         acceptButton.layer.cornerRadius = 12
-                declineButton.layer.cornerRadius = 12
-
                 fetchDonationDetails()
       
     }
@@ -56,7 +54,6 @@ class DonationDetailsViewController: UIViewController {
                self.typeLabel.text = "Type: \(data["type"] as? String ?? "")"
 
                self.donorNameLabel.text = data["market"] as? String
-               self.phoneLabel.text = data["phone"] as? String
                self.addressLabel.text = data["address"] as? String
                self.distanceLabel.text = "\(data["distance"] as? String ?? "") away"
                self.notesLabel.text = data["notes"] as? String

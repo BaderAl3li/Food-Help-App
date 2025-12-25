@@ -14,6 +14,7 @@ class MyPickupsVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var Home: UIImageView!
     var pickups: [FoodDonation] = []
         let db = Firestore.firestore()
 
@@ -53,7 +54,9 @@ class MyPickupsVC: UIViewController {
                             pickupDate: data["pickupDate"] as? String ?? "",
                             location: data["locationName"] as? String ?? "",
                             distance: data["distanceKm"] as? Double ?? 0,
-                            status: data["status"] as? String ?? ""
+                            status: data["status"] as? String ?? "",
+                            acceptedNgoId: data["acceptedNgoId"] as? String ?? ""
+
                         )
 
                         self.pickups.append(item)
