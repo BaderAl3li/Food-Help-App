@@ -28,31 +28,41 @@ class ApprovalViewController: UIViewController {
     
     func loadPendingUser() {
             Firestore.firestore()
-                .collection("users")
+                .collection("Users")
                 .whereField("status", isEqualTo: "pending")
                 .limit(to: 1)
                 .getDocuments { snapshot, error in
 
-                    guard let doc = snapshot?.documents.first else {
-                        self.showNoRequestsState()
-                        return
-                    }
+                    if let error = error {
+                                    print("❌ Firestore error:", error)
+                                    return
+                                }
 
-                    let data = doc.data()
-                    self.currentUserId = doc.documentID
+                                guard let doc = snapshot?.documents.first else {
+                                    print("ℹ️ No pending users found")
+                                    self.showNoRequestsState()
+                                    return
+                                }
 
-                    self.fNameLabel.text = data["firstName"] as? String ?? "-"
-                    self.lNameLabel.text = data["lastName"] as? String ?? "-"
-                    self.emailLabel.text = data["email"] as? String ?? "-"
-                    self.numberLabel.text = data["phone"] as? String ?? "-"
+                                let data = doc.data()
+                                print("✅ Loaded user:", data)
+
+                                self.currentUserId = doc.documentID
+
+                                self.fNameLabel?.text = data["fName"] as? String ?? "-"
+                                self.lNameLabel?.text = data["lName"] as? String ?? "-"
+                                self.emailLabel?.text = data["email"] as? String ?? "-"
+                                self.numberLabel?.text = data["number"] as? String ?? "-"
+
                 }
         }
     
     func showNoRequestsState() {
-            fNameLabel.text = "No pending"
-            lNameLabel.text = ""
-            emailLabel.text = ""
-            numberLabel.text = ""
+        fNameLabel?.text = "No pending"
+        lNameLabel?.text = ""
+        emailLabel?.text = ""
+        numberLabel?.text = ""
+
         }
     
     @IBAction func approveTapped(_ sender: Any) {
@@ -67,7 +77,7 @@ class ApprovalViewController: UIViewController {
            guard let userId = currentUserId else { return }
 
            Firestore.firestore()
-               .collection("users")
+               .collection("Users")
                .document(userId)
                .updateData(["status": status])
 
