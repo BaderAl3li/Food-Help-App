@@ -17,17 +17,39 @@ class ViewController: UIViewController {
     
     
     @IBAction func signoutClicked(_ sender: UIButton) {
+        
         let alert = UIAlertController(
             title: "Are you sure?",
-            message: "Logging out requires you to sign in again. Are you sure you want to log out from your account?",
+            message: "Logging out requires to log in again. Are you sure you want to continue?",
             preferredStyle: .alert
         )
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive)) //{_ in
-            
-        //}
+
+        alert.addAction(
+            UIAlertAction(title: "Sign out", style: .destructive) { _ in
+                do {
+                    try Auth.auth().signOut()
+                    self.navigateToLogin()
+                } catch {
+                    self.showAlert(title: "Signout Failed", message: "Retry in a few minutes")
+                }
+            }
+        )
+
         present(alert, animated: true)
+
+    }
+    
+    func navigateToLogin(){
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let loginVC = sb.instantiateViewController(withIdentifier: "Home")
+
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
+                window.rootViewController = loginVC
+                window.makeKeyAndVisible()
+            }
     }
     
     override func viewDidLoad() {
@@ -50,6 +72,13 @@ class ViewController: UIViewController {
         
     }
     
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
 
 }
+
 

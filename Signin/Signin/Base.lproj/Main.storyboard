@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="53T-Qi-kQg">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -41,18 +41,19 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="t0v-16-Hjf"/>
                     <connections>
                         <outlet property="imageView" destination="1Od-SE-BXb" id="uG2-tg-Qrw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="274" y="-18"/>
+            <point key="canvasLocation" x="1199.2366412213739" y="-18.30985915492958"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cld-39-88f">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="sRA-py-lyk" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" modalPresentationStyle="fullScreen" id="sRA-py-lyk" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OCL-JM-R1M">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,12 +99,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f13-ac-hAW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1162.5954198473282" y="-8.4507042253521139"/>
+            <point key="canvasLocation" x="2089.3129770992364" y="-8.4507042253521139"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="eP9-xu-CjD">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="0xk-hi-yT8" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DonorHome" modalPresentationStyle="fullScreen" id="0xk-hi-yT8" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ev5-tI-pFE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyu-4b-tV3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5551.9083969465646" y="-146.47887323943664"/>
+            <point key="canvasLocation" x="6478.6259541984728" y="-146.47887323943664"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2nq-NO-5ks">
@@ -267,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eF5-hu-QD4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6325.9541984732823" y="-415.49295774647891"/>
+            <point key="canvasLocation" x="7252.6717557251905" y="-415.49295774647891"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="nM3-QQ-WNT">
@@ -347,12 +348,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y0R-Cc-xTG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6417.5572519083971" y="326.76056338028172"/>
+            <point key="canvasLocation" x="7344.2748091603053" y="326.76056338028172"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mab-Np-ZuF">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="jk6-C2-RX3" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NgoHome" modalPresentationStyle="fullScreen" id="jk6-C2-RX3" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VDp-Qy-1iB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -601,12 +602,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrz-Sf-mch" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2287.7862595419847" y="460.56338028169017"/>
+            <point key="canvasLocation" x="3214.5038167938928" y="460.56338028169017"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="noy-6c-AzY">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="gen-Pb-Eag" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdminHome" modalPresentationStyle="fullScreen" id="gen-Pb-Eag" customClass="ViewController" customModule="Signin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="593-Bz-VHh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -618,6 +619,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tF6-yt-tar">
+                                <rect key="frame" x="26" y="716" width="340" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Sign out">
+                                    <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="signoutClicked:" destination="gen-Pb-Eag" eventType="touchUpInside" id="ean-kB-kSP"/>
+                                    <action selector="signoutClicked:" destination="jk6-C2-RX3" eventType="touchUpInside" id="q8b-pl-0n5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IKx-Ea-Wwl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -625,7 +638,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mP1-kD-kdy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3066" y="-253"/>
+            <point key="canvasLocation" x="3991.6030534351144" y="-253.52112676056339"/>
         </scene>
         <!--Donor Sign Up-->
         <scene sceneID="jYE-fw-Asv">
@@ -734,6 +747,9 @@
                                         <color key="tintColor" name="surface"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system"/>
+                                        <connections>
+                                            <segue destination="sRA-py-lyk" kind="showDetail" id="tSS-7c-UIa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -881,6 +897,24 @@
             </objects>
             <point key="canvasLocation" x="2985" y="-1270"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5Oa-hR-mPi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="53T-Qi-kQg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d2b-uw-iZc">
+                        <rect key="frame" x="0.0" y="118" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="2of-Qw-YNv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HBg-ZP-DAj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="272.51908396946561" y="-18.30985915492958"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="kkh-Bg-1pV"/>
@@ -905,13 +939,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
-            <color red="0.70980392160000005" green="0.71764705880000002" blue="0.74117647060000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

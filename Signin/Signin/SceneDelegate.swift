@@ -6,19 +6,65 @@
 //
 
 import UIKit
-
+import FirebaseAuth
+import FirebaseFirestore
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+        func scene(_ scene: UIScene,
+                   willConnectTo session: UISceneSession,
+                   options connectionOptions: UIScene.ConnectionOptions) {
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+
+            window = UIWindow(windowScene: windowScene)
+            setRootViewController()
+            window?.makeKeyAndVisible()
+        }
+
+        private func setRootViewController() {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+
+            guard let user = Auth.auth().currentUser else {
+                let homeVC = sb.instantiateViewController(withIdentifier: "Home")
+                window?.rootViewController = homeVC
+                return
+            }
+
+            Firestore.firestore().collection("users").document(user.uid).getDocument { [weak self] snapshot, error in
+                guard let self = self else { return }
+
+                if error != nil {
+                    let homeVC = sb.instantiateViewController(withIdentifier: "Home")
+                    self.window?.rootViewController = homeVC
+                    return
+                }
+
+                let role = (snapshot?.data()?["role"] as? String ?? "").lowercased()
+
+                switch role {
+                case "donor":
+                    let donorVC = sb.instantiateViewController(withIdentifier: "DonorHome")
+                    self.window?.rootViewController = donorVC
+
+                case "ngo":
+                    let ngoVC = sb.instantiateViewController(withIdentifier: "NgoHome")
+                    self.window?.rootViewController = ngoVC
+
+                case "admin":
+                    let adminVC = sb.instantiateViewController(withIdentifier: "AdminHome")
+                    self.window?.rootViewController = adminVC
+
+                default:
+                    let homeVC = sb.instantiateViewController(withIdentifier: "Home")
+                    self.window?.rootViewController = homeVC
+                }
+            }
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,5 +96,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 
