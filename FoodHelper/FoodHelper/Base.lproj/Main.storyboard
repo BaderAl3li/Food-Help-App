@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Dashboard View Controller-->
         <scene sceneID="vrv-1C-a2t">
             <objects>
-                <viewController id="Zt0-Ew-WcG" sceneMemberID="viewController">
+                <viewController id="Zt0-Ew-WcG" customClass="DashboardViewController" customModule="FoodHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t7e-hs-AQW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,15 +246,24 @@
                         <viewLayoutGuide key="safeArea" id="uu9-tG-1Ba"/>
                         <color key="backgroundColor" red="0.7872417826" green="0.36952978269999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="ngoNameLabel" destination="nLf-79-ygV" id="gCA-wN-lSh"/>
+                        <outlet property="pendingCountLabel" destination="cJi-vH-r9y" id="F3r-Um-vDd"/>
+                        <outlet property="pickedCountLabel" destination="Jpl-iv-L8o" id="RwU-3e-kk6"/>
+                        <outlet property="totalCountLabel" destination="tCN-fc-hsY" id="dDq-3Q-MZr"/>
+                        <outlet property="urgentTitleLabel" destination="5IP-ta-PoO" id="wgy-jz-TA9"/>
+                        <outlet property="urgentView" destination="Afu-h7-Ipa" id="6uo-ku-k6x"/>
+                        <outlet property="verifiedLabel" destination="cE5-BL-V9X" id="9Ls-Wy-HTg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFY-7v-2g8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2207" y="-30"/>
         </scene>
-        <!--View Controller-->
+        <!--Available Donations View Controller-->
         <scene sceneID="eeN-s7-Wnw">
             <objects>
-                <viewController id="hJP-Mn-nlE" customClass="ADViewController" customModule="FoodHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hJP-Mn-nlE" customClass="AvailableDonationsViewController" customModule="FoodHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jnb-cK-0CI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -545,7 +554,7 @@
         <!--Item-->
         <scene sceneID="QOL-K1-U1S">
             <objects>
-                <viewController id="nah-RO-d07" sceneMemberID="viewController">
+                <viewController id="nah-RO-d07" customClass="MyPickupsViewController" customModule="FoodHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rgv-WV-2VL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
