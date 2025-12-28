@@ -58,14 +58,14 @@ class NgoApprovalView: UIViewController {
       }
 
       // MARK: - Actions
-      @IBAction func approveTapped(_ sender: Any) {
-          updateStatus("approved")
-      }
-
-      @IBAction func declineTapped(_ sender: Any) {
-          updateStatus("declined")
-      }
-
+      
+    @IBAction func approveTapped(_ sender: Any) {
+        updateStatus("approved")
+    }
+    @IBAction func declineTapped(_ sender: Any) {
+        updateStatus("decline")
+    }
+    
       func updateStatus(_ status: String) {
           guard let ngoId = currentNgoId else {
               print("⚠️ No NGO selected")

@@ -26,24 +26,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYM-eb-feV">
-                                <rect key="frame" x="74" y="651" width="245" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Button (1)" title=""/>
-                                <connections>
-                                    <segue destination="wBo-HA-8IS" kind="showDetail" id="ZVd-Ml-dg1"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4u-Lz-pmu">
-                                <rect key="frame" x="70" y="503" width="253" height="98"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Button" title=""/>
-                                <connections>
-                                    <segue destination="geV-EQ-Usy" kind="showDetail" id="yZT-1v-Hds"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food Help" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJV-fk-5Pd">
                                 <rect key="frame" x="121" y="380" width="150" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -85,6 +67,38 @@
                                     <segue destination="2Rf-Pa-Un5" kind="showDetail" id="vuS-Gm-fcF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-Pj-Anw">
+                                <rect key="frame" x="143" y="530" width="107" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="oval.fill" catalog="system" title="Button"/>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="oval.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qFU-pt-xXb">
+                                <rect key="frame" x="99" y="531" width="195" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="oval.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mg1-iV-0Ir">
+                                <rect key="frame" x="99" y="629" width="195" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manage Users" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoe-Ew-GgZ">
+                                <rect key="frame" x="140" y="548" width="110" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manage Donations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpz-1d-4C1">
+                                <rect key="frame" x="124" y="647" width="143" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZvS-YM-rr9"/>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.61176470588235299" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NAN-uU-OhT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1250" y="158"/>
+            <point key="canvasLocation" x="-1251.145038167939" y="157.74647887323945"/>
         </scene>
         <!--Manage Users-->
         <scene sceneID="hNY-C2-8lt">
@@ -823,6 +837,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (8)" title=""/>
                                 <connections>
+                                    <action selector="declineTapped:" destination="wF3-gl-5hx" eventType="touchUpInside" id="Wf2-99-iOq"/>
                                     <segue destination="2Rf-Pa-Un5" kind="showDetail" id="bn7-Tl-j6H"/>
                                 </connections>
                             </button>
@@ -875,6 +890,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (7)" title=""/>
                                 <connections>
+                                    <action selector="approveTapped:" destination="wF3-gl-5hx" eventType="touchUpInside" id="Z2N-Tw-tcl"/>
                                     <segue destination="2Rf-Pa-Un5" kind="showDetail" id="3kT-QK-zoD"/>
                                 </connections>
                             </button>
@@ -1286,15 +1302,15 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bn7-Tl-j6H"/>
-        <segue reference="ZVd-Ml-dg1"/>
-        <segue reference="yZT-1v-Hds"/>
-        <segue reference="n8Y-dO-tIM"/>
+        <segue reference="Qmn-La-XP7"/>
+        <segue reference="u9i-hv-bnF"/>
+        <segue reference="vuS-Gm-fcF"/>
+        <segue reference="NMY-Bt-23X"/>
+        <segue reference="Ywr-s1-UHJ"/>
+        <segue reference="9yz-0e-7v8"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBackgroundColor"/>
     <resources>
-        <image name="Button" width="229" height="84"/>
-        <image name="Button (1)" width="221" height="76"/>
         <image name="Button (2)" width="119" height="47"/>
         <image name="Button (3)" width="119" height="47"/>
         <image name="Button (4)" width="119" height="47"/>
@@ -1316,14 +1332,15 @@
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="bell.fill" catalog="system" width="123" height="128"/>
         <image name="line.3.horizontal" catalog="system" width="128" height="65"/>
+        <image name="oval.fill" catalog="system" width="128" height="96"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
