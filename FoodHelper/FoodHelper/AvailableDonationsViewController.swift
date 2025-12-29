@@ -24,24 +24,33 @@ class AvailableDonationsViewController: UIViewController, UITableViewDelegate, U
     }
     
     func fetchDonations() {
-            db.collection("donations")
-                .whereField("status", isEqualTo: "pending")
-                .getDocuments { snap, _ in
-                    self.donations = snap?.documents.compactMap {
-                        Donation(
-                            id: $0.documentID,
-                            title: $0["title"] as? String ?? "",
-                            description: $0["description"] as? String ?? "",
-                            expiryDate: ($0["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
-                            status: $0["status"] as? String ?? "",
-                            latitude: $0["latitude"] as? Double ?? 0,
-                            longitude: $0["longitude"] as? Double ?? 0,
-                            acceptedBy: $0["acceptedBy"] as? String
-                        )
-                    } ?? []
+        db.collection("donations")
+            .whereField("status", isEqualTo: "pending")
+            .getDocuments { snap, error in
+                if let error = error {
+                    print("Error fetching donations: \(error)")
+                    return
+                }
+
+                self.donations = snap?.documents.compactMap {
+                    let data = $0.data()
+                    return Donation(
+                        id: $0.documentID,
+                        title: data["title"] as? String ?? "",
+                        description: data["description"] as? String ?? "",
+                        expiryDate: (data["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
+                        status: data["status"] as? String ?? "",
+                        latitude: data["latitude"] as? Double ?? 0,
+                        longitude: data["longitude"] as? Double ?? 0,
+                        acceptedBy: data["acceptedBy"] as? String
+                    )
+                } ?? []
+
+                DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-        }
+            }
+    }
     
     
 

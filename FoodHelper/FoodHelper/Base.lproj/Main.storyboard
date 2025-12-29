@@ -385,10 +385,10 @@
             </objects>
             <point key="canvasLocation" x="5077.0992366412211" y="-30.281690140845072"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="dLH-Ok-M1F">
             <objects>
-                <viewController id="NVu-Yk-xS4" sceneMemberID="viewController">
+                <viewController id="NVu-Yk-xS4" customClass="MapViewController" customModule="FoodHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="utx-Vy-lPr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -409,6 +409,9 @@
                         <viewLayoutGuide key="safeArea" id="jVX-Pj-YaI"/>
                         <color key="backgroundColor" red="0.7872417826" green="0.36952978269999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="s33-so-1fV" id="J7i-VQ-ZcC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFi-Jt-WU3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -26,95 +26,97 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var PickedView: UIView!
     @IBOutlet weak var TotalView: UIView!
     @IBOutlet weak var WelcomeView: UIView!
+    
     let db = Firestore.firestore()
         let uid = Auth.auth().currentUser!.uid
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadNGOInfo()
-        loadStats()
-        loadUrgentDonation()
 
-    }
-    
-    func styleUI() {
-            urgentView.layer.cornerRadius = 16
-            urgentView.layer.shadowColor = UIColor.black.cgColor
-            urgentView.layer.shadowOpacity = 0.15
-            urgentView.layer.shadowOffset = CGSize(width: 0, height: 4)
-            urgentView.layer.shadowRadius = 8
-        
-        PendingView.layer.cornerRadius = 16
-        PickedView.layer.cornerRadius = 16
-        TotalView.layer.cornerRadius = 16
-        WelcomeView.layer.cornerRadius = 16
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            styleUI()
+            loadNGOInfo()
+            loadStats()
+            loadUrgentDonation()
         }
-    
-    
-    func loadNGOInfo() {
-           db.collection("users").document(uid).getDocument { snap, _ in
-               guard let data = snap?.data() else { return }
 
-               self.ngoNameLabel.text = data["name"] as? String ?? "NGO"
-               let verified = data["verified"] as? Bool ?? false
+        // MARK: - UI Styling
+        func styleUI() {
+            let views = [urgentView, PendingView, PickedView, TotalView, WelcomeView]
+            views.forEach { view in
+                view?.layer.cornerRadius = 16
+                view?.layer.shadowColor = UIColor.black.cgColor
+                view?.layer.shadowOpacity = 0.15
+                view?.layer.shadowOffset = CGSize(width: 0, height: 4)
+                view?.layer.shadowRadius = 8
+            }
+        }
 
-               self.verifiedLabel.text = verified ? "Verified NGO" : "Not Verified ✖"
-               self.verifiedLabel.textColor = verified ? .systemGreen : .systemRed
-           }
-       }
+        // MARK: - Load NGO Info
+        func loadNGOInfo() {
+            db.collection("users").document(uid).getDocument { snap, _ in
+                guard let data = snap?.data() else { return }
+                self.ngoNameLabel.text = data["name"] as? String ?? "NGO"
+                let verified = data["verified"] as? Bool ?? false
+                self.verifiedLabel.text = verified ? "Verified NGO" : "Not Verified ✖"
+                self.verifiedLabel.textColor = verified ? .systemGreen : .systemRed
+            }
+        }
 
-       func loadStats() {
-           db.collection("donations")
-               .whereField("acceptedBy", isEqualTo: uid)
-               .getDocuments { snap, _ in
-                   let picked = snap?.documents.filter {
-                       $0["status"] as? String == "picked"
-                   }.count ?? 0
-                   self.pickedCountLabel.text = "\(picked)"
-               }
+        // MARK: - Load Stats
+        func loadStats() {
+            // Picked count
+            db.collection("donations")
+                .whereField("acceptedBy", isEqualTo: uid)
+                .whereField("status", isEqualTo: "picked")
+                .getDocuments { snap, _ in
+                    self.pickedCountLabel.text = "\(snap?.documents.count ?? 0)"
+                }
 
-           db.collection("donations")
-               .whereField("status", isEqualTo: "pending")
-               .getDocuments { snap, _ in
-                   self.pendingCountLabel.text = "\(snap?.documents.count ?? 0)"
-               }
+            // Pending count
+            db.collection("donations")
+                .whereField("status", isEqualTo: "pending")
+                .getDocuments { snap, _ in
+                    self.pendingCountLabel.text = "\(snap?.documents.count ?? 0)"
+                }
 
-           db.collection("donations").getDocuments { snap, _ in
-               self.totalCountLabel.text = "\(snap?.documents.count ?? 0)"
-           }
-       }
+            // Total donations
+            db.collection("donations").getDocuments { snap, _ in
+                self.totalCountLabel.text = "\(snap?.documents.count ?? 0)"
+            }
+        }
 
-    func loadUrgentDonation() {
-           db.collection("donations")
-               .whereField("status", isEqualTo: "pending")
-               .getDocuments { snap, _ in
+        // MARK: - Load Urgent Donation
+        func loadUrgentDonation() {
+            db.collection("donations")
+                .whereField("status", isEqualTo: "pending")
+                .getDocuments { snap, _ in
+                    guard let docs = snap?.documents, !docs.isEmpty else {
+                        self.urgentView.isHidden = true
+                        return
+                    }
 
-                   guard let docs = snap?.documents else {
-                       self.urgentView.isHidden = true
-                       return
-                   }
+                    let today = Date()
+                    let urgent = docs.first { doc in
+                        if let expiryTs = doc["expiryDate"] as? Timestamp {
+                            let expiryDate = expiryTs.dateValue()
+                            return Calendar.current.isDateInToday(expiryDate)
+                        }
+                        return false
+                    }
 
-                   let today = Date()
+                    guard let doc = urgent else {
+                        self.urgentView.isHidden = true
+                        return
+                    }
 
-                   let urgent = docs.first {
-                       let expiry = ($0["expiryDate"] as? Timestamp)?.dateValue() ?? Date()
-                       return Calendar.current.isDateInToday(expiry)
-                   }
+                    self.urgentView.isHidden = false
+                    self.urgentTitleLabel.text = doc["title"] as? String
 
-                   guard let doc = urgent else {
-                       self.urgentView.isHidden = true
-                       return
-                   }
-
-                   self.urgentView.isHidden = false
-                   self.urgentTitleLabel.text = doc["title"] as? String
-
-                   if let ts = doc["expiryDate"] as? Timestamp {
-                       let formatter = DateFormatter()
-                       formatter.dateStyle = .medium
-                       formatter.timeStyle = .short
-                   }
-               }
-       }
-   }
+                    if let ts = doc["expiryDate"] as? Timestamp {
+                        let formatter = DateFormatter()
+                        formatter.dateStyle = .medium
+                        formatter.timeStyle = .short
+                        self.urgentExpiryLabel.text = "Expires: \(formatter.string(from: ts.dateValue()))"
+                    }
+                }
+        }
+    }

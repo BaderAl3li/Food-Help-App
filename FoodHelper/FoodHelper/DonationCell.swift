@@ -35,10 +35,23 @@ class DonationCell: UITableViewCell {
             acceptButton.layer.cornerRadius = 8
         }
 
-        func configure(with donation: Donation) {
-            titleLabel.text = donation.title
-            expiryLabel.text = donation.expiryDate
-            distanceLabel.text = "📍 \(Int.random(in: 1...10)) km"
-            foodImageView.image = UIImage(named: "food_placeholder")
+    func configure(with donation: Donation) {
+        titleLabel.text = donation.title
+
+        if let expiry = donation.expiryDate {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .short
+            expiryLabel.text = "⏰ Expires: \(dateFormatter.string(from: expiry.dateValue()))"
+            expiryLabel.isHidden = false
+        } else {
+            expiryLabel.isHidden = true
         }
+
+        distanceLabel.text = donation.distance != nil
+            ? "📍 \(donation.distance!) km"
+            : ""
+
+        foodImageView.image = UIImage(named: donation.imageName ?? "food_placeholder")
+    }
     }
