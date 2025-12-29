@@ -11,7 +11,7 @@
         <!--Recurring donation (with info)-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="CurrentRecurringDonationVC" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="CurrentRecurringDonationVC" customModule="code3" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,11 +28,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-t9-kqw">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcJ-t9-kqw" userLabel="resumeButton">
                                 <rect key="frame" x="94" y="644" width="205" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Button" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button 1" title=""/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXo-bw-kdh" userLabel="pauseButton">
+                                <rect key="frame" x="94" y="644" width="205" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button (1) 2" title=""/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recurring Donations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5WV-r1-6g7">
                                 <rect key="frame" x="118" y="58" width="156" height="21"/>
@@ -77,13 +83,24 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Recurring" title=""/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXW-YX-rag">
-                                <rect key="frame" x="82" y="708" width="228" height="66"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXW-YX-rag" userLabel="createButton">
+                                <rect key="frame" x="84" y="704" width="228" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Button (1)" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button (3) 2" title=""/>
                                 <connections>
+                                    <action selector="createRecurringClick:" destination="sIp-s4-KsU" eventType="touchUpInside" id="NHu-oo-lWo"/>
                                     <segue destination="TYZ-nQ-oAU" kind="showDetail" id="9RB-MH-G4m"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAD-Jg-4Lj" userLabel="EditButton">
+                                <rect key="frame" x="82" y="704" width="228" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button (2) 1" title=""/>
+                                <connections>
+                                    <action selector="createRecurringClick:" destination="sIp-s4-KsU" eventType="touchUpInside" id="sIi-rD-6NP"/>
+                                    <action selector="editOnClick:" destination="sIp-s4-KsU" eventType="touchUpInside" id="vsy-hA-rSg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FL-x0-3fC">
@@ -104,10 +121,11 @@
                         <color key="backgroundColor" red="0.59999999999999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="infoLabel" destination="lWr-qo-2U2" id="ciI-24-5j6"/>
+                        <outlet property="infoLabel" destination="lWr-qo-2U2" id="g3b-j7-6dH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="sIp-s4-KsU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-802.29007633587787" y="-311.26760563380282"/>
         </scene>
@@ -686,12 +704,14 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Back" width="42" height="40"/>
-        <image name="Button" width="204" height="52"/>
-        <image name="Button (1)" width="204" height="52"/>
         <image name="Button (1) 1" width="293" height="68"/>
+        <image name="Button (1) 2" width="204" height="52"/>
         <image name="Button (2)" width="266" height="63"/>
+        <image name="Button (2) 1" width="204" height="52"/>
         <image name="Button (3)" width="204" height="52"/>
+        <image name="Button (3) 2" width="204" height="52"/>
         <image name="Button (4)" width="181" height="49"/>
+        <image name="Button 1" width="204" height="52"/>
         <image name="Donation" width="24" height="24"/>
         <image name="Home" width="24" height="24"/>
         <image name="Notification" width="24" height="24"/>
@@ -705,7 +725,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

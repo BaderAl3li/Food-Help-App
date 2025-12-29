@@ -13,6 +13,13 @@ import FirebaseFirestore
     
     final class CreateRecurringDonationVC: UIViewController {
         
+        @IBOutlet weak var resumeButton: UIButton!
+        @IBOutlet weak var pauseButton: UIButton!
+        @IBOutlet weak var createButton: UIButton!
+        @IBOutlet weak var EditButton: UIButton!
+
+        
+        @IBOutlet weak var infoLabel: UILabel!
 
         @IBOutlet weak var donationTypeField: UITextField!
         @IBOutlet weak var foodTypeField: UITextField!
@@ -30,7 +37,7 @@ import FirebaseFirestore
             print("Current screen loaded, uid:", Auth.auth().currentUser?.uid ?? "nil")
             super.viewDidLoad()
             quantityField.keyboardType = .numberPad
-            loadIfEditing()
+            load()
         }
         
 
@@ -97,7 +104,7 @@ import FirebaseFirestore
             }
         }
 
-        private func loadIfEditing() {
+        private func load() {
             guard let uid = Auth.auth().currentUser?.uid else { return }
             
             let ref = db.collection("users")
@@ -106,11 +113,19 @@ import FirebaseFirestore
                 .document("current")
             
             ref.getDocument { [weak self] snapshot, _ in
-                guard let self = self,
-                      let data = snapshot?.data() else { return }
-                
+                guard let self = self else { return }
+
+                // If document is missing OR has no fields
+                if snapshot?.exists == false || (snapshot?.data()?.isEmpty ?? true) {
+                    DispatchQueue.main.async {
+                      //  self.infoLabel.text = "No current recurring donations."
+                    }
+                    return
+                }
+
+                guard let data = snapshot?.data() else { return }
+
                 DispatchQueue.main.async {
-                    // self.finishButton.setTitle("Update", for: .normal)
                     self.donationTypeField.text = data["donationType"] as? String
                     self.foodTypeField.text = data["foodType"] as? String
                     self.quantityField.text = "\(data["quantity"] as? Int ?? 0)"
@@ -121,11 +136,13 @@ import FirebaseFirestore
                 }
             }
         }
+
         
         private func showAlert(_ message: String, completion: (() -> Void)? = nil) {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completion?() })
             present(alert, animated: true)
         }
+
     }
 
