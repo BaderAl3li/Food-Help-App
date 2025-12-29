@@ -107,6 +107,15 @@
                                 <color key="textColor" name="text_not_selected"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYt-nr-2BE" userLabel="liveTrack">
+                                <rect key="frame" x="85" y="644" width="228" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Button (1) 3" title=""/>
+                                <connections>
+                                    <segue destination="7fv-PT-YgK" kind="showDetail" id="4u2-HV-kD6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -332,7 +341,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jad-Or-Nwv">
-                                <rect key="frame" x="81" y="677" width="228" height="52"/>
+                                <rect key="frame" x="81" y="684" width="228" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (3)"/>
@@ -412,7 +421,7 @@
         <!--Tracking main page-->
         <scene sceneID="Gty-0R-J2S">
             <objects>
-                <viewController title="Tracking main page" modalPresentationStyle="fullScreen" id="7fv-PT-YgK" customClass="ViewController" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Tracking main page" modalPresentationStyle="fullScreen" id="7fv-PT-YgK" customClass="TrackingFirstVc" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pYk-GQ-KbU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,6 +454,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Back" title=""/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="showDetail" id="1SJ-9u-vL8"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recurring Donation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiV-BK-sJh">
                                 <rect key="frame" x="116" y="99" width="169" height="24"/>
@@ -499,8 +511,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Package:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-FF-b2P">
-                                <rect key="frame" x="37" y="493" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="             Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-FF-b2P">
+                                <rect key="frame" x="116" y="493" width="166" height="148"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -520,10 +532,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="{{{Charity}}}" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91i-dY-4YY">
+                                <rect key="frame" x="155" y="200" width="91" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ili-PC-bU2"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="charityNameLabel" destination="91i-dY-4YY" id="oED-wJ-BTn"/>
+                        <outlet property="donationDetailsLabel" destination="g2o-FF-b2P" id="BnM-7r-BHS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1g-wf-2ze" sceneMemberID="firstResponder"/>
             </objects>
@@ -667,12 +690,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7dQ-HO-FP5"/>
-        <segue reference="HUU-bG-47g"/>
+        <segue reference="4u2-HV-kD6"/>
+        <segue reference="1SJ-9u-vL8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Back" width="42" height="40"/>
         <image name="Button (1) 1" width="293" height="68"/>
+        <image name="Button (1) 3" width="204" height="52"/>
         <image name="Button (2)" width="266" height="63"/>
         <image name="Button (3)" width="204" height="52"/>
         <image name="Button (4)" width="181" height="49"/>

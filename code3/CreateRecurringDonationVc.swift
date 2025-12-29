@@ -13,22 +13,17 @@ import FirebaseFirestore
     
     final class CreateRecurringDonationVC: UIViewController {
         
-        @IBOutlet weak var resumeButton: UIButton!
-        @IBOutlet weak var pauseButton: UIButton!
-        @IBOutlet weak var createButton: UIButton!
-        @IBOutlet weak var EditButton: UIButton!
 
-        
-        @IBOutlet weak var infoLabel: UILabel!
+        @IBOutlet weak var infoLabel: UILabel?
 
-        @IBOutlet weak var donationTypeField: UITextField!
-        @IBOutlet weak var foodTypeField: UITextField!
-        @IBOutlet weak var quantityField: UITextField!
-        @IBOutlet weak var preferredCharityField: UITextField!
-        @IBOutlet weak var scheduleIntervalField: UITextField!
-        @IBOutlet weak var scheduleTimeField: UITextField!
-        @IBOutlet weak var deliveryCompanyField: UITextField!
-        @IBOutlet weak var finishButton: UIButton!
+        @IBOutlet weak var donationTypeField: UITextField?
+        @IBOutlet weak var foodTypeField: UITextField?
+        @IBOutlet weak var quantityField: UITextField?
+        @IBOutlet weak var preferredCharityField: UITextField?
+        @IBOutlet weak var scheduleIntervalField: UITextField?
+        @IBOutlet weak var scheduleTimeField: UITextField?
+        @IBOutlet weak var deliveryCompanyField: UITextField?
+        @IBOutlet weak var finishButton: UIButton?
         
         private let db = Firestore.firestore()
         
@@ -36,7 +31,7 @@ import FirebaseFirestore
         override func viewDidLoad() {
             print("Current screen loaded, uid:", Auth.auth().currentUser?.uid ?? "nil")
             super.viewDidLoad()
-            quantityField.keyboardType = .numberPad
+            quantityField?.keyboardType = .numberPad
             load()
         }
         
@@ -65,8 +60,8 @@ import FirebaseFirestore
             }
             print("UID:", Auth.auth().currentUser?.uid ?? "nil")
             
-            let quantity = Int(quantityField.text ?? "") ?? 0
-            
+            let quantity = Int(quantityField?.text ?? "") ?? 0
+
             let ref = db.collection("users")
                 .document(uid)
                 .collection("recurringDonation")
@@ -77,13 +72,13 @@ import FirebaseFirestore
                 
                 
                 let dataToSave: [String: Any] = [
-                    "donationType": self.donationTypeField.text ?? "",
-                    "foodType": self.foodTypeField.text ?? "",
+                    "donationType": self.donationTypeField?.text ?? "",
+                    "foodType": self.foodTypeField?.text ?? "",
                     "quantity": quantity,
-                    "preferredCharity": self.preferredCharityField.text ?? "",
-                    "scheduleInterval": self.scheduleIntervalField.text ?? "",
-                    "scheduleTime": self.scheduleTimeField.text ?? "",
-                    "deliveryCompany": self.deliveryCompanyField.text ?? "",
+                    "preferredCharity": self.preferredCharityField?.text ?? "",
+                    "scheduleInterval": self.scheduleIntervalField?.text ?? "",
+                    "scheduleTime": self.scheduleTimeField?.text ?? "",
+                    "deliveryCompany": self.deliveryCompanyField?.text ?? "",
                     "status": "active",
                     "updatedAt": FieldValue.serverTimestamp()
                 ]
@@ -120,14 +115,13 @@ import FirebaseFirestore
                 guard let data = snapshot?.data() else { return }
 
                 DispatchQueue.main.async {
-                    self.donationTypeField.text = data["donationType"] as? String
-                    self.foodTypeField.text = data["foodType"] as? String
-                    self.quantityField.text = "\(data["quantity"] as? Int ?? 0)"
-                    self.preferredCharityField.text = data["preferredCharity"] as? String
-                    self.scheduleIntervalField.text = data["scheduleInterval"] as? String
-                    self.scheduleTimeField.text = data["scheduleTime"] as? String
-                    self.deliveryCompanyField.text = data["deliveryCompany"] as? String
-                }
+                    self.donationTypeField?.text = data["donationType"] as? String
+                    self.foodTypeField?.text = data["foodType"] as? String
+                    self.quantityField?.text = "\(data["quantity"] as? Int ?? 0)"
+                    self.preferredCharityField?.text = data["preferredCharity"] as? String
+                    self.scheduleIntervalField?.text = data["scheduleInterval"] as? String
+                    self.scheduleTimeField?.text = data["scheduleTime"] as? String
+                    self.deliveryCompanyField?.text = data["deliveryCompany"] as? String                }
             }
         }
 

@@ -19,7 +19,7 @@ final class CurrentRecurringDonationVC: UIViewController {
             super.viewDidLoad()
 
             infoLabel.numberOfLines = 0
-            infoLabel.text = "Loading..."
+            infoLabel.text = "No recurring donation yet."
             infoLabel.lineBreakMode = .byWordWrapping
 
             listener = try? RecurringDonationStore().listen { [weak self] data in
