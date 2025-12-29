@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2EA7D82F02AA0D001F1B6A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2EA7D72F02AA0D001F1B6A /* DGCharts */; };
+		7E2EA7DA2F02AA0D001F1B6A /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */; };
 		AC44E8F42EF7D7180017BE8F /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = AC44E8F32EF7D7180017BE8F /* Cloudinary */; };
 		AC5FF4E92EF921BC00591BE8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AC5FF4E82EF921BC00591BE8 /* SDWebImage */; };
 		AC5FF4EB2EF921BC00591BE8 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AC5FF4EA2EF921BC00591BE8 /* SDWebImageMapKit */; };
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E2EA7DA2F02AA0D001F1B6A /* DGChartsDynamic in Frameworks */,
 				ACCE56B72EFA8509003DCA1A /* FirebaseDatabase in Frameworks */,
 				ACCE56A92EFA8509003DCA1A /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				AC5FF4E92EF921BC00591BE8 /* SDWebImage in Frameworks */,
@@ -78,6 +81,7 @@
 				ACCE56A52EFA8509003DCA1A /* FirebaseAnalytics in Frameworks */,
 				AC5FF4EB2EF921BC00591BE8 /* SDWebImageMapKit in Frameworks */,
 				AC44E8F42EF7D7180017BE8F /* Cloudinary in Frameworks */,
+				7E2EA7D82F02AA0D001F1B6A /* DGCharts in Frameworks */,
 				ACCE56A72EFA8509003DCA1A /* FirebaseAnalyticsCore in Frameworks */,
 				ACCE56BF2EFA8509003DCA1A /* FirebaseFunctionsCombine-Community in Frameworks */,
 				ACCE56C92EFA8509003DCA1A /* FirebasePerformance in Frameworks */,
@@ -162,6 +166,8 @@
 				ACCE56CA2EFA8509003DCA1A /* FirebaseRemoteConfig */,
 				ACCE56CC2EFA8509003DCA1A /* FirebaseStorage */,
 				ACCE56CE2EFA8509003DCA1A /* FirebaseStorageCombine-Community */,
+				7E2EA7D72F02AA0D001F1B6A /* DGCharts */,
+				7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */,
 			);
 			productName = Signin;
 			productReference = E5FEB6A72EE9439300A437C5 /* Signin.app */;
@@ -195,6 +201,7 @@
 				AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
 				AC5FF4E72EF921BC00591BE8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				ACCE569F2EFA8509003DCA1A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E5FEB6A82EE9439300A437C5 /* Products */;
@@ -424,6 +431,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cloudinary/cloudinary_ios.git";
@@ -451,6 +466,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E2EA7D72F02AA0D001F1B6A /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
+		};
 		AC44E8F32EF7D7180017BE8F /* Cloudinary */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AC44E8F22EF7D7180017BE8F /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
