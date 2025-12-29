@@ -16,11 +16,13 @@ class donorProfile: UIViewController {
     @IBOutlet weak var donorEmail: UILabel!
     @IBOutlet weak var donorNum: UILabel!
     @IBOutlet weak var barChart: BarChartView!
+    @IBOutlet weak var yAxisLabel: UILabel!
     
     override func viewDidLoad() {
-        loadUserData()
+        
         super.viewDidLoad()
-
+        loadUserData()
+        loadGraph()
         // Do any additional setup after loading the view.
     }
     
@@ -102,15 +104,15 @@ class donorProfile: UIViewController {
             let df = DateFormatter()
             df.dateFormat = "EEE"
             
-            let labels = (0..<7).compactMap { i -> String?
-                guard let d = cal.date(byAdding: .day, value: i, to: startOfWeek) else{
-                    return df.string(from: d)
-                }
+            let labels: [String] = (0..<7).compactMap { i in
+                            guard let d = cal.date(byAdding: .day, value: i, to: startOfWeek) else { return nil }
+                            return df.string(from: d)
+                        }
                 let entries = totals.enumerated().map { i, total in
                     BarChartDataEntry(x: Double(i), y: Double(total))
                 }
                 DispatchQueue.main.async{
-                    let set = BarChartDataSet(entries: entries, label: "This Week")
+                    let set = BarChartDataSet(entries: entries, label: "Donations This Week")
                     let data = BarChartData(dataSet: set)
                     
                     self.barChart.data = data
@@ -119,11 +121,18 @@ class donorProfile: UIViewController {
                     self.barChart.xAxis.labelPosition = .bottom
                     self.barChart.rightAxis.enabled = false
                     
+                    self.barChart.leftAxis.granularity = 1
+                    self.barChart.leftAxis.granularityEnabled = true
+                    self.barChart.leftAxis.valueFormatter = DefaultAxisValueFormatter(decimals: 0)
+                    
+                    
                     self.barChart.notifyDataSetChanged()
+                    
+                    self.yAxisLabel.transform = CGAffineTransform(rotationAngle: -.pi / 2)
                 }
             }
         }
-    }
+    
     
     func navigateToLogin(){
         let sb = UIStoryboard(name: "Main", bundle: nil)

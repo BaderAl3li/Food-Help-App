@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7E2EA7D82F02AA0D001F1B6A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2EA7D72F02AA0D001F1B6A /* DGCharts */; };
-		7E2EA7DA2F02AA0D001F1B6A /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */; };
 		AC44E8F42EF7D7180017BE8F /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = AC44E8F32EF7D7180017BE8F /* Cloudinary */; };
 		AC5FF4E92EF921BC00591BE8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AC5FF4E82EF921BC00591BE8 /* SDWebImage */; };
 		AC5FF4EB2EF921BC00591BE8 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = AC5FF4EA2EF921BC00591BE8 /* SDWebImageMapKit */; };
@@ -68,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E2EA7DA2F02AA0D001F1B6A /* DGChartsDynamic in Frameworks */,
 				ACCE56B72EFA8509003DCA1A /* FirebaseDatabase in Frameworks */,
 				ACCE56A92EFA8509003DCA1A /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				AC5FF4E92EF921BC00591BE8 /* SDWebImage in Frameworks */,
@@ -167,7 +165,6 @@
 				ACCE56CC2EFA8509003DCA1A /* FirebaseStorage */,
 				ACCE56CE2EFA8509003DCA1A /* FirebaseStorageCombine-Community */,
 				7E2EA7D72F02AA0D001F1B6A /* DGCharts */,
-				7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */,
 			);
 			productName = Signin;
 			productReference = E5FEB6A72EE9439300A437C5 /* Signin.app */;
@@ -470,11 +467,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
-		};
-		7E2EA7D92F02AA0D001F1B6A /* DGChartsDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7E2EA7D62F02AA0D001F1B6A /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = DGChartsDynamic;
 		};
 		AC44E8F32EF7D7180017BE8F /* Cloudinary */ = {
 			isa = XCSwiftPackageProductDependency;
