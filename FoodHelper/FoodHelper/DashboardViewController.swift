@@ -22,6 +22,10 @@ class DashboardViewController: UIViewController {
         @IBOutlet weak var urgentView: UIView!
         @IBOutlet weak var urgentTitleLabel: UILabel!
     
+    @IBOutlet weak var PendingView: UIView!
+    @IBOutlet weak var PickedView: UIView!
+    @IBOutlet weak var TotalView: UIView!
+    @IBOutlet weak var WelcomeView: UIView!
     let db = Firestore.firestore()
         let uid = Auth.auth().currentUser!.uid
     
@@ -33,6 +37,21 @@ class DashboardViewController: UIViewController {
         loadUrgentDonation()
 
     }
+    
+    func styleUI() {
+            urgentView.layer.cornerRadius = 16
+            urgentView.layer.shadowColor = UIColor.black.cgColor
+            urgentView.layer.shadowOpacity = 0.15
+            urgentView.layer.shadowOffset = CGSize(width: 0, height: 4)
+            urgentView.layer.shadowRadius = 8
+        
+        PendingView.layer.cornerRadius = 16
+        PickedView.layer.cornerRadius = 16
+        TotalView.layer.cornerRadius = 16
+        WelcomeView.layer.cornerRadius = 16
+        }
+    
+    
     func loadNGOInfo() {
            db.collection("users").document(uid).getDocument { snap, _ in
                guard let data = snap?.data() else { return }
@@ -66,20 +85,36 @@ class DashboardViewController: UIViewController {
            }
        }
 
-       func loadUrgentDonation() {
+    func loadUrgentDonation() {
            db.collection("donations")
                .whereField("status", isEqualTo: "pending")
                .getDocuments { snap, _ in
-                   guard let docs = snap?.documents else { return }
+
+                   guard let docs = snap?.documents else {
+                       self.urgentView.isHidden = true
+                       return
+                   }
+
                    let today = Date()
 
                    let urgent = docs.first {
-                       let date = ($0["expiryDate"] as? Timestamp)?.dateValue() ?? Date()
-                       return Calendar.current.isDateInToday(date)
+                       let expiry = ($0["expiryDate"] as? Timestamp)?.dateValue() ?? Date()
+                       return Calendar.current.isDateInToday(expiry)
                    }
 
-                   self.urgentView.isHidden = urgent == nil
-                   self.urgentTitleLabel.text = urgent?["title"] as? String ?? ""
+                   guard let doc = urgent else {
+                       self.urgentView.isHidden = true
+                       return
+                   }
+
+                   self.urgentView.isHidden = false
+                   self.urgentTitleLabel.text = doc["title"] as? String
+
+                   if let ts = doc["expiryDate"] as? Timestamp {
+                       let formatter = DateFormatter()
+                       formatter.dateStyle = .medium
+                       formatter.timeStyle = .short
+                   }
                }
        }
    }

@@ -42,6 +42,8 @@ class AvailableDonationsViewController: UIViewController, UITableViewDelegate, U
                     self.tableView.reloadData()
                 }
         }
+    
+    
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             donations.count
