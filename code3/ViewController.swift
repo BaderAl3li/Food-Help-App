@@ -11,7 +11,6 @@ import FirebaseAuth
 
 final class CurrentRecurringDonationVC: UIViewController {
 
-    // Connect this to ONE UILabel in your storyboard (e.g. a big multiline label)
     @IBOutlet weak var infoLabel: UILabel!
     private var listener: ListenerRegistration?
 
@@ -25,7 +24,6 @@ final class CurrentRecurringDonationVC: UIViewController {
             listener = try? RecurringDonationStore().listen { [weak self] data in
                 guard let self = self else { return }
 
-                // Always update UI on main thread
                 DispatchQueue.main.async {
                     guard let data = data else {
                         self.infoLabel.text = "No recurring donation yet."

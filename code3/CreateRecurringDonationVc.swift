@@ -29,7 +29,6 @@ import FirebaseFirestore
         
         
         override func viewDidLoad() {
-            print("Current screen loaded, uid:", Auth.auth().currentUser?.uid ?? "nil")
             super.viewDidLoad()
             quantityField?.keyboardType = .numberPad
             load()
@@ -38,7 +37,6 @@ import FirebaseFirestore
 
         @IBAction func finishTapped(_ sender: UIButton) {
             
-            // make sure theyre all filled
             guard
                 let donationType = donationTypeField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !donationType.isEmpty,
                 let foodType = foodTypeField?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !foodType.isEmpty,
@@ -52,14 +50,47 @@ import FirebaseFirestore
                 return
             }
 
-            
-            print("Finish tapped")
+            if donationType.count > 15 {
+                showAlert("Donation type cannot exceed 15 characters.")
+                return
+            }
+
+            if foodType.count > 10 {
+                showAlert("Food type cannot exceed 10 characters.")
+                return
+            }
+
+            if preferredCharity.count > 18 {
+                showAlert("Preferred charity cannot exceed 18 characters.")
+                return
+            }
+
+            if deliveryCompany.count > 20 {
+                showAlert("Delivery company name cannot exceed 20 characters.")
+                return
+            }
+
+            if scheduleInterval.count > 3 {
+                showAlert("Schedule interval must be 3 digits or less.")
+                return
+            }
+
+            if scheduleTime.count > 5 {
+                showAlert("Schedule time format should be short (example: 14:30).")
+                return
+            }
+
+            if quantityText.count > 4 {
+                showAlert("Quantity cannot exceed 4 digits.")
+                return
+            }
+
+
             guard let uid = Auth.auth().currentUser?.uid else {
                 showAlert("Not signed in")
                 return
             }
-            print("UID:", Auth.auth().currentUser?.uid ?? "nil")
-            
+
             let quantity = Int(quantityField?.text ?? "") ?? 0
 
             let ref = db.collection("users")
@@ -67,30 +98,17 @@ import FirebaseFirestore
                 .collection("recurringDonation")
                 .document("current")
 
-            ref.getDocument { [weak self] snapshot, error in
-                guard let self = self else { return }
-                
-                
-                let dataToSave: [String: Any] = [
-                    "donationType": self.donationTypeField?.text ?? "",
-                    "foodType": self.foodTypeField?.text ?? "",
-                    "quantity": quantity,
-                    "preferredCharity": self.preferredCharityField?.text ?? "",
-                    "scheduleInterval": self.scheduleIntervalField?.text ?? "",
-                    "scheduleTime": self.scheduleTimeField?.text ?? "",
-                    "deliveryCompany": self.deliveryCompanyField?.text ?? "",
-                    "status": "active",
-                    "updatedAt": FieldValue.serverTimestamp()
-                ]
-                
-                ref.setData(dataToSave, merge: true) { error in
-                    if let error = error {
-                        print("Firestore save failed:", error)
-                    } else {
-                        print("Firestore save success")
-                    }
-                }
-            }
+            ref.setData([
+                "donationType": donationType,
+                "foodType": foodType,
+                "quantity": quantity,
+                "preferredCharity": preferredCharity,
+                "scheduleInterval": scheduleInterval,
+                "scheduleTime": scheduleTime,
+                "deliveryCompany": deliveryCompany,
+                "status": "active",
+                "updatedAt": FieldValue.serverTimestamp()
+            ], merge: true)
         }
 
         private func load() {
@@ -104,14 +122,6 @@ import FirebaseFirestore
             ref.getDocument { [weak self] snapshot, _ in
                 guard let self = self else { return }
 
-                // If document is missing OR has no fields
-                if snapshot?.exists == false || (snapshot?.data()?.isEmpty ?? true) {
-                    DispatchQueue.main.async {
-                      //  self.infoLabel.text = "No current recurring donations."
-                    }
-                    return
-                }
-
                 guard let data = snapshot?.data() else { return }
 
                 DispatchQueue.main.async {
@@ -121,7 +131,8 @@ import FirebaseFirestore
                     self.preferredCharityField?.text = data["preferredCharity"] as? String
                     self.scheduleIntervalField?.text = data["scheduleInterval"] as? String
                     self.scheduleTimeField?.text = data["scheduleTime"] as? String
-                    self.deliveryCompanyField?.text = data["deliveryCompany"] as? String                }
+                    self.deliveryCompanyField?.text = data["deliveryCompany"] as? String
+                }
             }
         }
 
@@ -148,14 +159,10 @@ import FirebaseFirestore
 
                 DispatchQueue.main.async {
                     if let error = error {
-                        print("Failed to delete recurring donation:", error)
                         self.showAlert("Failed to delete. Please try again.")
                         return
                     }
 
-                    print("Recurring donation deleted")
-
-                    // Clear UI after delete – all optional now
                     self.infoLabel?.text = "No current recurring donations."
                     self.donationTypeField?.text = ""
                     self.foodTypeField?.text = ""

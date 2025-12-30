@@ -15,6 +15,7 @@ class TrackingFirstVc: UIViewController {
     @IBOutlet weak var charityNameLabel: UILabel!
     @IBOutlet weak var donationDetailsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var charityName: UILabel!
     
     private let db = Firestore.firestore()
     
@@ -27,6 +28,7 @@ class TrackingFirstVc: UIViewController {
         
         charityNameLabel.text = "Loading..."
         charityNameLabel.textAlignment = .center
+        charityName.textAlignment = .center
         
         donationDetailsLabel.numberOfLines = 0
         donationDetailsLabel.lineBreakMode = .byWordWrapping
@@ -47,20 +49,17 @@ class TrackingFirstVc: UIViewController {
     }
     
     private func loadRecurringDonation() {
-        // 1. Get current user
         guard let uid = Auth.auth().currentUser?.uid else {
             charityNameLabel.text = "Not logged in"
             donationDetailsLabel.text = ""
             return
         }
         
-        // 2. Reference to the recurring donation document
         let docRef = db.collection("users")
             .document(uid)
             .collection("recurringDonation")
             .document("current")
         
-        // 3. Fetch data
         docRef.getDocument { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -76,7 +75,6 @@ class TrackingFirstVc: UIViewController {
                 return
             }
             
-            // 4. Read fields from Firestore
             let preferredCharity = data["preferredCharity"] as? String ?? "Unknown charity"
             let donationType = data["donationType"] as? String ?? "-"
             let deliveryCompany = data["deliveryCompany"] as? String ?? "-"
@@ -94,7 +92,6 @@ class TrackingFirstVc: UIViewController {
             var latitude  = data["latitude"]  as? Double
             var longitude = data["longitude"] as? Double
             
-            // If missing, set and save the default ones ONCE
             if latitude == nil || longitude == nil {
                 latitude  = 26.185218
                 longitude = 50.503164
@@ -104,19 +101,12 @@ class TrackingFirstVc: UIViewController {
                 locationData["longitude"] = longitude!
                 locationData["updatedAt"] = FieldValue.serverTimestamp()
                 
-                docRef.setData(locationData, merge: true) { error in
-                    if let error = error {
-                        print("Failed to save initial coords: \(error)")
-                    } else {
-                        print("Initial coordinates saved to Firestore")
-                    }
-                }
+                docRef.setData(locationData, merge: true) { _ in }
             }
             
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             
-            // 5. Build the text for donationDetailsLabel
             var detailsParts: [String] = []
             
             detailsParts.append("Type: \(donationType)")
@@ -139,42 +129,35 @@ class TrackingFirstVc: UIViewController {
             
             detailsParts.append("Status: \(status)")
             
-            // 6. Update labels on screen
             self.charityNameLabel.text = preferredCharity
             self.donationDetailsLabel.text = detailsParts.joined(separator: "\n")
             
-            // 7. Setup map & fake live tracking if we now have coordinates
             if let lat = latitude, let lon = longitude {
                 let coord = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                 self.baseCoordinate = coord
                 self.setupMapTracking(at: coord)
-            } else {
-                print("No coordinates available even after default logic.")
             }
         }
     }
     
     private func setupMapTracking(at coordinate: CLLocationCoordinate2D) {
-        // Center the map around the base coordinate
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
 
-        // Add / configure annotation
-        trackingAnnotation.title = "Delivery Location"
+        trackingAnnotation.title = "REHAN"
         trackingAnnotation.coordinate = coordinate
+        
         if !mapView.annotations.contains(where: { $0 === trackingAnnotation }) {
             mapView.addAnnotation(trackingAnnotation)
         }
 
-        // Start timer for fake tracking
         startMockTracking()
     }
 
     private func startMockTracking() {
-        trackingTimer?.invalidate() // in case it was already running
+        trackingTimer?.invalidate()
 
-        // Update every 2 seconds (adjust as you like)
         trackingTimer = Timer.scheduledTimer(
             timeInterval: 1.5,
             target: self,
@@ -187,18 +170,16 @@ class TrackingFirstVc: UIViewController {
     @objc private func updateMockLocation() {
         guard let base = baseCoordinate else { return }
 
-        let latOffset = Double.random(in: -0.005...0.005)
-        let lonOffset = Double.random(in: -0.005...0.005)
+        let latOffset = Double.random(in: -0.0025...0.0025)
+        let lonOffset = Double.random(in: -0.0025...0.0025)
 
         let newCoord = CLLocationCoordinate2D(
             latitude: base.latitude + latOffset,
             longitude: base.longitude + lonOffset
         )
 
-        // Update annotation position
         trackingAnnotation.coordinate = newCoord
-
-        // Optional: keep map centered roughly on the new location
+        
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: newCoord, span: span)
         mapView.setRegion(region, animated: true)
