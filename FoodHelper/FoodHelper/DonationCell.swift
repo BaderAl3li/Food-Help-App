@@ -20,6 +20,8 @@ class DonationCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var acceptButton: UIButton!
     
+    weak var delegate: DonationCellDelegate?
+        var donation: Donation?
     
     override func awakeFromNib() {
         super.awakeFromNib()

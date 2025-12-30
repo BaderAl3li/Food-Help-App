@@ -617,15 +617,28 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" title="pickup complete"/>
+                                                            <connections>
+                                                                <action selector="pickButtonTapped:" destination="l67-qK-AQ7" eventType="touchUpInside" id="An3-Ge-dQ6"/>
+                                                            </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpn-Tv-Itg">
+                                                            <rect key="frame" x="129" y="95" width="42" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailLabel" destination="Zpn-Tv-Itg" id="RvB-Kh-7WY"/>
                                             <outlet property="foodImage" destination="BXS-ea-sHZ" id="DCT-6n-cVd"/>
+                                            <outlet property="foodImageView" destination="BXS-ea-sHZ" id="j1h-Te-nfg"/>
                                             <outlet property="locationLabel" destination="hvp-ii-r6P" id="dus-JF-fmo"/>
+                                            <outlet property="pickupButton" destination="kLe-9J-NN0" id="6Bw-RF-rhb"/>
                                             <outlet property="statusLabel" destination="lJJ-qw-0ok" id="bvL-ju-zDR"/>
                                             <outlet property="timeLabel" destination="syW-xd-tKD" id="gng-0H-1cr"/>
                                             <outlet property="titleLabel" destination="nex-8C-tYI" id="VVT-yL-nk5"/>

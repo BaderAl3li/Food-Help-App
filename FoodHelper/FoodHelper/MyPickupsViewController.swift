@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , DonationCellDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     let db = Firestore.firestore()
@@ -59,8 +59,14 @@ class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PickupCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PickupCell", for: indexPath) as! PickupCell
+        
         let donation = items[indexPath.row]
+        
+        cell.configure(with: donation)
+        cell.onPickTapped = { [weak self] in
+                self?.markAsPicked(donationId: donation.id)
+            }
 
         // Show title and formatted expiry date
         let dateFormatter = DateFormatter()
@@ -70,6 +76,8 @@ class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableVie
 
         return cell
     }
+    
+    
 
     // MARK: - TableView Delegate
 
