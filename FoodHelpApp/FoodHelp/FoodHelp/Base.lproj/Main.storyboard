@@ -94,6 +94,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Manage Donations">
                                     <color key="baseBackgroundColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="bYw-dN-WCg" kind="showDetail" id="gJg-2l-Gp9"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZvS-YM-rr9"/>
@@ -121,8 +124,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e51-I3-szY">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e51-I3-szY">
                                 <rect key="frame" x="0.0" y="139" width="393" height="713"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J23-vV-tej">
                                     <size key="itemSize" width="160" height="147"/>
@@ -198,12 +202,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jj9-yy-wFr"/>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.61176470588235299" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="e51-I3-szY" firstAttribute="top" secondItem="Jj9-yy-wFr" secondAttribute="top" id="AsZ-Td-pCR"/>
-                            <constraint firstItem="Jj9-yy-wFr" firstAttribute="bottom" secondItem="e51-I3-szY" secondAttribute="bottom" id="DEq-lh-UB2"/>
-                            <constraint firstItem="Jj9-yy-wFr" firstAttribute="trailing" secondItem="e51-I3-szY" secondAttribute="trailing" id="LH6-4F-slu"/>
-                            <constraint firstItem="e51-I3-szY" firstAttribute="leading" secondItem="Jj9-yy-wFr" secondAttribute="leading" id="vVN-0k-udV"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yAd-r5-l1P"/>
                     <connections>
@@ -631,6 +629,18 @@
                                 <rect key="frame" x="0.0" y="99" width="393" height="753"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qcf-xb-h01">
+                                <rect key="frame" x="17" y="682" width="148" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jz4-fg-aWd">
+                                <rect key="frame" x="229" y="682" width="148" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voM-JJ-XeG">
                                 <rect key="frame" x="16" y="488" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -689,6 +699,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Donation ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRK-3C-9eh">
+                                <rect key="frame" x="16" y="644" width="94" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NpX-O5-FSE">
                                 <rect key="frame" x="16" y="301" width="361" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -714,6 +731,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system" title="">
                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="bYw-dN-WCg" kind="showDetail" id="fyM-3V-Eof"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J7h-Gk-eeg">
                                 <rect key="frame" x="16" y="158" width="361" height="34"/>
@@ -761,6 +781,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (2)" title=""/>
+                                <connections>
+                                    <action selector="saveTapped:" destination="bu6-vx-m9w" eventType="touchUpInside" id="WBX-j0-1Ba"/>
+                                    <segue destination="bYw-dN-WCg" kind="showDetail" id="x8z-hK-aeK"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hR-gd-H28">
                                 <rect key="frame" x="16" y="158" width="0.0" height="0.0"/>
@@ -783,11 +807,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qy-Ag-QWT">
+                                <rect key="frame" x="229" y="644" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gjx-HO-D4b"/>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.61176470588235299" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="kP4-5z-e9n"/>
+                    <connections>
+                        <outlet property="charityField" destination="NpX-O5-FSE" id="fXN-bH-6Mu"/>
+                        <outlet property="deliveryField" destination="eJE-we-CWa" id="nOU-gG-Qoj"/>
+                        <outlet property="donationIdField" destination="qcf-xb-h01" id="3HN-5V-9eE"/>
+                        <outlet property="donationTypeField" destination="J7h-Gk-eeg" id="JJt-nh-eBh"/>
+                        <outlet property="endingDateField" destination="BOc-2I-Hna" id="nuG-he-oAu"/>
+                        <outlet property="foodTypeField" destination="jHC-OL-nM4" id="3OZ-Mo-hgW"/>
+                        <outlet property="quantityField" destination="0Q8-HR-ANu" id="TTK-J7-0lo"/>
+                        <outlet property="scheduleTimeField" destination="HRC-8C-HHs" id="NbO-32-Nvh"/>
+                        <outlet property="startingDateField" destination="XO1-24-n8F" id="EJ8-Z8-fFP"/>
+                        <outlet property="userIdField" destination="jz4-fg-aWd" id="bMH-bd-fQA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wi5-Ny-Jzc" sceneMemberID="firstResponder"/>
             </objects>
@@ -969,6 +1012,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (5)" title=""/>
+                                <connections>
+                                    <action selector="clearTapped:" destination="FNK-kC-7bX" eventType="touchUpInside" id="v1c-Jh-ifL"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I8m-lt-zCJ">
                                 <rect key="frame" x="16" y="378" width="361" height="34"/>
@@ -1004,6 +1050,25 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKU-S7-FDI">
                                 <rect key="frame" x="17" y="602" width="361" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Donation ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEN-WP-wQx">
+                                <rect key="frame" x="16" y="644" width="94" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EdT-bL-IH8">
+                                <rect key="frame" x="16" y="682" width="148" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="utZ-R2-gIs">
+                                <rect key="frame" x="230" y="682" width="148" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1084,6 +1149,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Button (4)" title=""/>
                                 <connections>
+                                    <action selector="createTapped:" destination="FNK-kC-7bX" eventType="touchUpInside" id="Zsd-7j-ukr"/>
                                     <segue destination="bYw-dN-WCg" kind="showDetail" id="Ead-oC-cwz"/>
                                 </connections>
                             </button>
@@ -1108,11 +1174,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dA9-p6-a7n">
+                                <rect key="frame" x="234" y="644" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZbO-Xd-FDG"/>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.61176470588235299" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="bdJ-Et-w30"/>
+                    <connections>
+                        <outlet property="charityField" destination="UbX-s1-knc" id="9Ta-34-I5V"/>
+                        <outlet property="deliveryField" destination="lKU-S7-FDI" id="Wml-cq-wS3"/>
+                        <outlet property="donationIdField" destination="EdT-bL-IH8" id="dB4-PS-vKy"/>
+                        <outlet property="donationTypeField" destination="bNj-wL-mkR" id="Oul-xM-oEP"/>
+                        <outlet property="endingDateField" destination="vTx-bh-v5f" id="cE6-78-qCn"/>
+                        <outlet property="foodTypeField" destination="ahz-bC-GNX" id="gQi-i8-12R"/>
+                        <outlet property="quantityField" destination="sBb-bH-d9V" id="G39-Fj-fw5"/>
+                        <outlet property="scheduleTimeField" destination="I8m-lt-zCJ" id="EUT-64-PyS"/>
+                        <outlet property="startingDateField" destination="a8s-6E-lzs" id="0fk-ao-keD"/>
+                        <outlet property="userIdField" destination="utZ-R2-gIs" id="jOM-p5-cuf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qc2-Rw-46a" sceneMemberID="firstResponder"/>
             </objects>
@@ -1293,8 +1378,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="78W-a9-fpc">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="78W-a9-fpc">
                                 <rect key="frame" x="0.0" y="139" width="393" height="713"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sOE-Mw-VDc">
                                     <size key="itemSize" width="160" height="147"/>
@@ -1354,6 +1440,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Home" title=""/>
+                                <connections>
+                                    <segue destination="9jF-2R-ES5" kind="showDetail" id="UVV-B8-eJA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS7-SF-MAk">
                                 <rect key="frame" x="330" y="50" width="47" height="39"/>
@@ -1367,17 +1456,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RBM-So-CbI"/>
                         <color key="backgroundColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="78W-a9-fpc" firstAttribute="top" secondItem="RBM-So-CbI" secondAttribute="top" id="FSG-Wo-d43"/>
-                            <constraint firstItem="RBM-So-CbI" firstAttribute="bottom" secondItem="78W-a9-fpc" secondAttribute="bottom" id="GEz-2T-UpN"/>
-                            <constraint firstItem="78W-a9-fpc" firstAttribute="leading" secondItem="RBM-So-CbI" secondAttribute="leading" id="gZZ-Oa-bnt"/>
-                            <constraint firstItem="RBM-So-CbI" firstAttribute="trailing" secondItem="78W-a9-fpc" secondAttribute="trailing" id="pbZ-jf-7Xh"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VxR-KJ-0lD"/>
                     <connections>
                         <outlet property="collectionView" destination="78W-a9-fpc" id="Ptm-Re-tu3"/>
-                        <segue destination="bu6-vx-m9w" kind="showDetail" id="722-XK-GlK"/>
+                        <outlet property="searchBar" destination="pKD-iA-739" id="35n-2e-83Q"/>
+                        <segue destination="bu6-vx-m9w" kind="showDetail" identifier="editDonation" id="722-XK-GlK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3oo-ER-ojc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1389,7 +1473,7 @@
         <segue reference="zIA-SW-ZIE"/>
         <segue reference="Ead-oC-cwz"/>
         <segue reference="vuS-Gm-fcF"/>
-        <segue reference="yiH-M2-rs7"/>
+        <segue reference="lJv-qz-V2w"/>
         <segue reference="gJp-jc-Qab"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemBackgroundColor"/>

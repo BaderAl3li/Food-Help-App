@@ -4,23 +4,32 @@ import FirebaseFirestore
 class ManageDonations: UIViewController,
                        UICollectionViewDataSource,
                        UICollectionViewDelegate,
-                       UICollectionViewDelegateFlowLayout {
+                       UICollectionViewDelegateFlowLayout,
+                       UISearchBarDelegate {
 
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchBar: UISearchBar!
 
+    // MARK: - Data
     var donations: [[String: Any]] = []
+    var filteredDonations: [[String: Any]] = []
     var selectedDonation: [String: Any]?
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.dataSource = self
         collectionView.delegate = self
 
+        searchBar.delegate = self
+        searchBar.placeholder = "Search by Donation ID"
+
         fetchDonations()
     }
 
-    // MARK: - Firestore
+    // MARK: - Fetch Donations
     func fetchDonations() {
         Firestore.firestore()
             .collection("Donations")
@@ -38,9 +47,15 @@ class ManageDonations: UIViewController,
 
                 self.donations = documents.map { doc in
                     var data = doc.data()
-                    data["id"] = doc.documentID   // ✅ IMPORTANT
+
+                    // Store Firestore document ID separately (for updates)
+                    data["docId"] = doc.documentID
+
+                    // DO NOT touch data["id"] (this is your custom ID field)
                     return data
                 }
+
+                self.filteredDonations = self.donations
 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -48,10 +63,10 @@ class ManageDonations: UIViewController,
             }
     }
 
-    // MARK: - Collection View
+    // MARK: - Collection View DataSource
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return donations.count
+        return filteredDonations.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -62,9 +77,9 @@ class ManageDonations: UIViewController,
             for: indexPath
         )
 
-        let donation = donations[indexPath.item]
+        let donation = filteredDonations[indexPath.item]
 
-        // 🔹 SHOW DONATION ID
+        // Label inside cell (tag = 1) shows DONATION ID FIELD
         if let label = cell.viewWithTag(1) as? UILabel {
             label.text = donation["id"] as? String ?? "No ID"
         }
@@ -75,7 +90,7 @@ class ManageDonations: UIViewController,
         return cell
     }
 
-    // MARK: - 2 per row layout
+    // MARK: - 2 Per Row Layout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -91,16 +106,40 @@ class ManageDonations: UIViewController,
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
 
-        selectedDonation = donations[indexPath.item]
+        selectedDonation = filteredDonations[indexPath.item]
         performSegue(withIdentifier: "editDonation", sender: self)
     }
 
-    // MARK: - Pass Data
+    // MARK: - Pass Data to EditDonation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editDonation",
            let editDonation = segue.destination as? EditDonation {
 
             editDonation.donationData = selectedDonation
         }
+    }
+
+    // MARK: - Search Bar (Search by Donation ID)
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String) {
+
+        if searchText.isEmpty {
+            filteredDonations = donations
+        } else {
+            let text = searchText.lowercased()
+            filteredDonations = donations.filter { donation in
+                let id = (donation["id"] as? String ?? "").lowercased()
+                return id.contains(text)
+            }
+        }
+
+        collectionView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        filteredDonations = donations
+        collectionView.reloadData()
     }
 }
