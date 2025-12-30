@@ -9,16 +9,25 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class AvailableDonationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class AvailableDonationsViewController: UIViewController,
+                                        UITableViewDelegate,
+                                        UITableViewDataSource,
+                                        DonationCellDelegate,
+                                        UISearchBarDelegate{
     
     @IBOutlet weak var tableView: UITableView!
-        var donations: [Donation] = []
-        let db = Firestore.firestore()
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var donations: [Donation] = []
+       var filteredDonations: [Donation] = []
 
+       let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         fetchDonations()
         
     }
@@ -50,26 +59,51 @@ class AvailableDonationsViewController: UIViewController, UITableViewDelegate, U
                     self.tableView.reloadData()
                 }
             }
+        self.filteredDonations = self.donations
+                      self.tableView.reloadData()
     }
     
     
 
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            donations.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            filteredDonations.count
         }
 
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath)
-            let item = donations[indexPath.row]
-            cell.textLabel?.text = item.title
-            cell.detailTextLabel?.text = "Expires: \(item.expiryDate)"
-            return cell
-        }
-
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let vc = storyboard?.instantiateViewController(withIdentifier: "DonationDetailsVC") as! DonationDetailsViewController
-            vc.donation = donations[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath) as! DonationCell
+        let donation = donations[indexPath.row]
+        cell.configure(with: donation)
+        cell.delegate = self
+        return cell
     }
 
+        // MARK: - Accept Donation
+    func didTapAccept(donation: Donation) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        db.collection("donations").document(donation.id)
+            .updateData([
+                "status": "accepted",
+                "acceptedBy": uid
+            ]) { error in
+                if let error = error {
+                    print("Error:", error)
+                } else {
+                    self.donations.removeAll { $0.id == donation.id }
+                    self.tableView.reloadData()
+                }
+            }
+    }
+
+        // MARK: - Search
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchText.isEmpty {
+                filteredDonations = donations
+            } else {
+                filteredDonations = donations.filter {
+                    $0.title.lowercased().contains(searchText.lowercased())
+                }
+            }
+            tableView.reloadData()
+        }
+    }

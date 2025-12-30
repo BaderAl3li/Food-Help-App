@@ -7,51 +7,55 @@
 
 import UIKit
 
+protocol DonationCellDelegate: AnyObject {
+    func didTapAccept(donation: Donation)
+}
+
 class DonationCell: UITableViewCell {
     
-        @IBOutlet weak var cardView: UIView!
-        @IBOutlet weak var foodImageView: UIImageView!
-        @IBOutlet weak var titleLabel: UILabel!
-        @IBOutlet weak var expiryLabel: UILabel!
-        @IBOutlet weak var distanceLabel: UILabel!
-        @IBOutlet weak var acceptButton: UIButton!
-
-
+    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var foodImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var expiryLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var acceptButton: UIButton!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     func setupUI() {
-            cardView.layer.cornerRadius = 14
-            cardView.layer.shadowColor = UIColor.black.cgColor
-            cardView.layer.shadowOpacity = 0.1
-            cardView.layer.shadowOffset = CGSize(width: 0, height: 4)
-            cardView.layer.shadowRadius = 6
-
-            foodImageView.layer.cornerRadius = 8
-            foodImageView.clipsToBounds = true
-
-            acceptButton.layer.cornerRadius = 8
-        }
-
+        cardView.layer.cornerRadius = 14
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOpacity = 0.1
+        cardView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        cardView.layer.shadowRadius = 6
+        
+        foodImageView.layer.cornerRadius = 8
+        foodImageView.clipsToBounds = true
+        
+        acceptButton.layer.cornerRadius = 8
+    }
+    
     func configure(with donation: Donation) {
+        self.donation = donation
         titleLabel.text = donation.title
-
-        if let expiry = donation.expiryDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            expiryLabel.text = "⏰ Expires: \(dateFormatter.string(from: expiry.dateValue()))"
-            expiryLabel.isHidden = false
-        } else {
-            expiryLabel.isHidden = true
-        }
-
-        distanceLabel.text = donation.distance != nil
-            ? "📍 \(donation.distance!) km"
-            : ""
-
-        foodImageView.image = UIImage(named: donation.imageName ?? "food_placeholder")
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        expiryLabel.text = "⏰ Expires: \(formatter.string(from: donation.expiryDate))"
+        
+        // Optional: hide distance if you don’t use it
+        distanceLabel.isHidden = true
+        
+        foodImageView.image = UIImage(named: "food_placeholder")
     }
+    
+    @IBAction func acceptTapped(_ sender: UIButton) {
+        guard let donation = donation else { return }
+        delegate?.didTapAccept(donation: donation)
     }
+}
