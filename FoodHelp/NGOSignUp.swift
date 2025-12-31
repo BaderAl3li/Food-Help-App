@@ -69,10 +69,11 @@ class NGOSignUp: UIViewController {
                 "email" : email,
                 "number": phonenum,
                 "password": password,
-                "role" : "ngo"
+                "role" : "ngo",
+                "status" : "pending"
             ])
             
-            self?.performSegue(withIdentifier: "NGOHome", sender: self)
+            self?.showAlert(title: "Registeration Confirmed", message: "Please wait for 24 hours until Admin approval then open the app again and you will be inside!")
         }
     }
     

@@ -64,13 +64,29 @@ class LoginViewController: UIViewController {
                         
                         if status == "approved"{
                             self.performSegue(withIdentifier: "Home", sender: sender)
-                        }else{
+                        }else if status == "pending"{
                             self.showAlert(title: "Please Wait", message: "Please Wait 24 Hours Until Admin Approval")
+                        }else{
+                            self.showAlert(title: "Account Rejected", message: "Please register again as your account has been rejected.")
                         }
                     }
                     
                 case "ngo":
-                    self.performSegue(withIdentifier: "NGOHome", sender: sender)
+                    guard let uid = Auth.auth().currentUser?.uid else {return}
+                    
+                    Firestore.firestore().collection("users").document(uid).getDocument{ [weak self] snapshot, _ in
+                        guard let self = self else {return}
+                        
+                        let status = snapshot?.data()?["status"] as? String ?? "pending"
+                        
+                        if status == "approved"{
+                            self.performSegue(withIdentifier: "NgoHome", sender: sender)
+                        }else if status == "pending"{
+                            self.showAlert(title: "Please Wait", message: "Please Wait 24 Hours Until Admin Approval")
+                        }else{
+                            self.showAlert(title: "Account Rejected", message: "Please register again as your account has been rejected.")
+                        }
+                    }
                 
                 case "admin":
                     self.performSegue(withIdentifier: "AdminHome", sender: sender)

@@ -24,6 +24,7 @@ class ApprovalViewController: UIViewController {
         loadPendingUser()
     }
     
+    // Loads pending users
     func loadPendingUser() {
             Firestore.firestore()
                 .collection("users")
@@ -34,28 +35,25 @@ class ApprovalViewController: UIViewController {
                 .getDocuments { snapshot, error in
 
                     if let error = error {
-                                    print("❌ Firestore error:", error)
                                     return
                                 }
 
                                 guard let doc = snapshot?.documents.first else {
-                                    print("ℹ️ No pending users found")
                                     self.showNoRequestsState()
                                     return
                                 }
 
                                 let data = doc.data()
-                                print("✅ Loaded user:", data)
-
+                                //loads users
+                                
                                 self.currentUserId = doc.documentID
-
                                 self.fNameLabel?.text = data["donor name"] as? String ?? "-"
                                 self.emailLabel?.text = data["email"] as? String ?? "-"
                                 self.numberLabel?.text = data["number"] as? String ?? "-"
 
                 }
         }
-    
+    // No pending status in the database
     func showNoRequestsState() {
         fNameLabel?.text = "No pending"
         emailLabel?.text = ""
@@ -63,12 +61,14 @@ class ApprovalViewController: UIViewController {
 
         }
     
+    //changes status to approve and updates the database
     @IBAction func approveTapped(_ sender: Any) {
         updateStatus("approved")
     }
     
+    //deletes user from database
     @IBAction func declineTapped(_ sender: Any) {
-        updateStatus("declined")
+        deleteUser()
     }
     
     func updateStatus(_ status: String) {
@@ -82,6 +82,16 @@ class ApprovalViewController: UIViewController {
            // Load next request automatically
            loadPendingUser()
        }
+    
+    func deleteUser(){
+        guard let userId = currentUserId else {return}
+        
+        Firestore.firestore()
+            .collection("users")
+            .document(userId)
+            .delete {_ in self.loadPendingUser()
+            }
+    }
     
 
 }

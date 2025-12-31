@@ -3,7 +3,6 @@ import FirebaseFirestore
 
 class CreateDonation: UIViewController {
 
-    // MARK: - Outlets
     @IBOutlet weak var donationIdField: UITextField!
     @IBOutlet weak var userIdField: UITextField!
     @IBOutlet weak var donationTypeField: UITextField!
@@ -31,7 +30,6 @@ class CreateDonation: UIViewController {
         ]
 
         if fields.contains(where: { $0?.isEmpty ?? true }) {
-            print("⚠️ All fields are required")
             return
         }
 
@@ -50,13 +48,8 @@ class CreateDonation: UIViewController {
 
         Firestore.firestore()
             .collection("Donations")
-            .addDocument(data: donationData) { error in
-                if let error = error {
-                    print("❌ Failed to create donation:", error)
-                } else {
-                    print("✅ Donation created")
-                    self.navigationController?.popViewController(animated: true)
-                }
+            .addDocument(data: donationData) { _ in
+                self.navigationController?.popViewController(animated: true)
             }
     }
 

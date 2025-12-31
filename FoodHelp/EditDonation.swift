@@ -3,7 +3,6 @@ import FirebaseFirestore
 
 class EditDonation: UIViewController {
 
-    // MARK: - Outlets
     @IBOutlet weak var donationTypeField: UITextField!
     @IBOutlet weak var foodTypeField: UITextField!
     @IBOutlet weak var quantityField: UITextField!
@@ -15,7 +14,6 @@ class EditDonation: UIViewController {
     @IBOutlet weak var userIdField: UITextField!
     @IBOutlet weak var donationIdField: UITextField!
 
-    // MARK: - Data
     var donationData: [String: Any]?
     var donationDocId: String?
 
@@ -36,11 +34,9 @@ class EditDonation: UIViewController {
         endingDateField.text   = donation["endingDate"] as? String ?? ""
         deliveryField.text     = donation["delivery"] as? String ?? ""
 
-        // ✅ NORMAL FIELDS
         donationIdField.text = donation["id"] as? String ?? ""
         userIdField.text     = donation["userId"] as? String ?? ""
 
-        // ✅ Firestore document ID (for update only)
         donationDocId = donation["docId"] as? String
     }
 
@@ -61,7 +57,6 @@ class EditDonation: UIViewController {
         ]
 
         if fields.contains(where: { $0?.isEmpty ?? true }) {
-            print("⚠️ All fields are required")
             return
         }
 
@@ -81,8 +76,56 @@ class EditDonation: UIViewController {
         Firestore.firestore()
             .collection("Donations")
             .document(docId)
+            .updateData(updatedData) { _ in
                 self.navigationController?.popViewController(animated: true)
             }
     }
 
+    @IBAction func deleteTapped(_ sender: Any) {
 
+        let alert = UIAlertController(
+            title: "Are you sure?",
+            message: "If you delete this donation you cannot bring it back.",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        alert.addAction(
+            UIAlertAction(title: "Delete", style: .destructive) { _ in
+
+                guard let docId = self.donationDocId else {
+                    self.showAlert(title: "Error", message: "Missing donation ID")
+                    return
+                }
+
+                Firestore.firestore()
+                    .collection("Donations")
+                    .document(docId)
+                    .delete { error in
+                        if error != nil {
+                            self.showAlert(
+                                title: "Delete Failed",
+                                message: "Please try again."
+                            )
+                        } else {
+                            self.performSegue(withIdentifier: "deleteClicke", sender: sender)
+                        }
+                    }
+
+            }
+        )
+
+        present(alert, animated: true)
+    }
+
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}

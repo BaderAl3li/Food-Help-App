@@ -7,18 +7,15 @@ class ManageUsers: UIViewController,
                    UICollectionViewDelegateFlowLayout,
                    UISearchBarDelegate {
 
-    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    // MARK: - Data
     var users: [[String: Any]] = []
     var filteredUsers: [[String: Any]] = []
     var isSearching = false
 
     var selectedUser: [String: Any]?
 
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,19 +26,12 @@ class ManageUsers: UIViewController,
         fetchUsers()
     }
 
-    // MARK: - Firestore
     func fetchUsers() {
         Firestore.firestore()
-            .collection("users") // ✅ lowercase users
-            .getDocuments { snapshot, error in
-
-                if let error = error {
-                    print("❌ Firestore error:", error)
-                    return
-                }
+            .collection("users")
+            .getDocuments { snapshot, _ in
 
                 guard let documents = snapshot?.documents else {
-                    print("⚠️ No users found")
                     return
                 }
 
@@ -57,7 +47,6 @@ class ManageUsers: UIViewController,
             }
     }
 
-    // MARK: - Search
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         let text = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -84,7 +73,6 @@ class ManageUsers: UIViewController,
         collectionView.reloadData()
     }
 
-    // MARK: - Collection View DataSource
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return isSearching ? filteredUsers.count : users.count
@@ -112,7 +100,6 @@ class ManageUsers: UIViewController,
         return cell
     }
 
-    // MARK: - Layout (2 per row)
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -124,7 +111,6 @@ class ManageUsers: UIViewController,
         return CGSize(width: width, height: 160)
     }
 
-    // MARK: - Select User
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
 
@@ -135,7 +121,6 @@ class ManageUsers: UIViewController,
         performSegue(withIdentifier: "editUser", sender: self)
     }
 
-    // MARK: - Pass Data
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editUser",
            let editUser = segue.destination as? EditUser {

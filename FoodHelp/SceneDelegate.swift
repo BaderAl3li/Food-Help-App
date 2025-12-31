@@ -63,8 +63,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
 
             case "ngo":
-                let ngoVC = sb.instantiateViewController(withIdentifier: "NgoHome")
-                self.window?.rootViewController = ngoVC
+                guard let uid = Auth.auth().currentUser?.uid  else {return}
+                
+                Firestore.firestore().collection("users").document(uid).getDocument {
+                    snapshot, _ in
+                    let status = snapshot?.data()?["status"] as? String ?? "pending"
+                    
+                    if status == "approved"{
+                        let NgoVC = sb.instantiateViewController(withIdentifier: "NgoHome")
+                        self.window?.rootViewController = NgoVC
+                    }else{
+                        let pendingVC = sb.instantiateViewController(withIdentifier: "HomeHome")
+                        self.window?.rootViewController = pendingVC
+                    }
+                }
 
             case "admin":
                 let adminVC = sb.instantiateViewController(withIdentifier: "AdminHome")
