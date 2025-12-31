@@ -1505,7 +1505,9 @@
                                 <rect key="frame" x="230" y="596" width="126" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Register"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Register">
+                                    <color key="baseBackgroundColor" systemColor="linkColor"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <segue destination="pHe-WY-LNW" kind="showDetail" id="ZBR-h2-0gt"/>
                                 </connections>
@@ -1669,6 +1671,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Register">
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="baseBackgroundColor" name="primary"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="registerButtonTapped:" destination="pHe-WY-LNW" eventType="touchUpInside" id="173-2S-JWy"/>
@@ -1846,6 +1849,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Register">
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="baseBackgroundColor" name="primary"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="registerButtonTapped:" destination="74M-9T-BfU" eventType="touchUpInside" id="qhr-Mn-NfL"/>
@@ -1938,7 +1942,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Leaderboard"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="Leaderboard                                                            &gt;"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Leaderboard                                                            &gt;">
+                                            <color key="baseBackgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <segue destination="kq8-ZX-nZZ" kind="showDetail" id="Jz5-cd-plG"/>
                                         </connections>
@@ -1948,7 +1954,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Leaderboard"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="Account Information                                               &gt;"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Account Information                                               &gt;">
+                                            <color key="baseBackgroundColor" systemColor="opaqueSeparatorColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <segue destination="6dr-fU-knq" kind="showDetail" id="xkb-z7-vN8"/>
                                         </connections>
@@ -2000,21 +2008,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMP-eD-GJ9">
-                                <rect key="frame" x="21" y="69" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" name="surface"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.backward" catalog="system"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sqs-tK-UeS">
-                                <rect key="frame" x="318" y="68" width="49" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="bell.fill" catalog="system">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nvr-wq-Sug"/>
                         <color key="backgroundColor" red="0.72941176470000002" green="0.61176470589999998" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -2225,7 +2218,7 @@
         <!--Recurring donation (with info)-->
         <scene sceneID="9pj-ZJ-YxH">
             <objects>
-                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="ppT-Kg-jZ3" customClass="CurrentRecurringDonationVC" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Recurring donation (with info)" modalPresentationStyle="fullScreen" id="ppT-Kg-jZ3" customClass="CurrentRecurringDonationVC" customModule="FoodHelp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vcy-EU-Br5">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2247,12 +2240,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eco-aa-nDX">
-                                <rect key="frame" x="329" y="41" width="48" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Notification" title=""/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsx-dE-Rho">
                                 <rect key="frame" x="16" y="33" width="66" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2315,7 +2302,7 @@
         <!--Create recurring-->
         <scene sceneID="VZD-hD-FJR">
             <objects>
-                <viewController title="Create recurring" modalPresentationStyle="fullScreen" id="Cd4-p6-1f3" customClass="CreateRecurringDonationVC" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Create recurring" modalPresentationStyle="fullScreen" id="Cd4-p6-1f3" customClass="CreateRecurringDonationVC" customModule="FoodHelp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PmA-D4-MDd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2332,12 +2319,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsm-EK-xqD">
-                                <rect key="frame" x="329" y="41" width="48" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Notification" title=""/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKT-Tn-wT8">
                                 <rect key="frame" x="16" y="33" width="66" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2487,7 +2468,7 @@
         <!--Tracking main page-->
         <scene sceneID="Dpo-uF-WCF">
             <objects>
-                <viewController title="Tracking main page" modalPresentationStyle="fullScreen" id="20f-wL-5iM" customClass="TrackingFirstVc" customModule="code3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Tracking main page" modalPresentationStyle="fullScreen" id="20f-wL-5iM" customClass="TrackingFirstVc" customModule="FoodHelp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KZD-oH-DYp">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2509,12 +2490,6 @@
                                 <rect key="frame" x="30" y="141" width="333" height="177"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CfB-8H-SHb">
-                                <rect key="frame" x="329" y="41" width="48" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Notification" title=""/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOv-cC-ZFt">
                                 <rect key="frame" x="16" y="33" width="66" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2619,12 +2594,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOQ-di-o72">
-                                <rect key="frame" x="329" y="41" width="48" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Notification" title=""/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X4C-Vm-vVS">
                                 <rect key="frame" x="16" y="33" width="66" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2684,8 +2653,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="TbP-dk-j4u"/>
         <segue reference="S25-Iu-ydd"/>
-        <segue reference="Kmb-Me-qGI"/>
+        <segue reference="twX-wG-6Th"/>
         <segue reference="Ofg-a0-5XP"/>
         <segue reference="Pxt-gD-3HO"/>
         <segue reference="fyM-3V-Eof"/>
@@ -2710,7 +2680,6 @@
         <image name="Button (8)" width="119" height="47"/>
         <image name="Home" width="70" height="30"/>
         <image name="Main" width="392" height="753"/>
-        <image name="Notification" width="35" height="35"/>
         <image name="Notification 1" width="360" height="62"/>
         <image name="Notification 1 (1)" width="360" height="76"/>
         <image name="Notification 2" width="360" height="60"/>
@@ -2736,17 +2705,23 @@
         <namedColor name="text_not_selected">
             <color red="1" green="1" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
