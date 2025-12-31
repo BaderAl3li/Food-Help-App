@@ -11,9 +11,10 @@ class PickupCell: UITableViewCell {
     
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var pickupButton: UIButton!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     var onPickTapped: (() -> Void)?
     
@@ -40,13 +41,14 @@ class PickupCell: UITableViewCell {
             titleLabel.text = donation.title
             
             let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .short
+            formatter.dateFormat = "HH:mm" // Set format to 24-hour
+            let startTimeString = formatter.string(from: donation.startTime)
+            let endTimeString = formatter.string(from: donation.endTime)
+            locationLabel.text = "Location: \(donation.location)" // Set location
+            timeLabel.text = "Available: from \(startTimeString) to \(endTimeString)" // Display time range
             
-            detailLabel.text = "Expires: \(formatter.string(from: donation.expiryDate))"
-            statusLabel.text = "Status: \(donation.status.capitalized)"
-            
-            foodImageView.image = UIImage(named: "food_placeholder") // optional
+            foodImageView.image = UIImage(named: "food_placeholder") // Placeholder image
         }
+
     }
 }

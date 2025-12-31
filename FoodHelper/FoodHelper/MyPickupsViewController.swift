@@ -9,8 +9,9 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource , DonationCellDelegate{
+class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
     @IBOutlet weak var tableView: UITableView!
     let db = Firestore.firestore()
     var items: [Donation] = []
@@ -18,79 +19,58 @@ class MyPickupsViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
-        loadPickups()
+               tableView.dataSource = self
+               loadPickups()
     }
 
     func loadPickups() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        db.collection("donations")
-            .whereField("acceptedBy", isEqualTo: uid)
-            .whereField("status", isEqualTo: "accepted")
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    print("Error fetching pickups: \(error)")
-                    return
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            
+            db.collection("donations")
+                .whereField("acceptedBy", isEqualTo: uid)
+                .whereField("status", isEqualTo: "accepted")
+                .getDocuments { snap, _ in
+                    
+                    self.items = snap?.documents.compactMap { doc in
+                        let d = doc.data()
+                        
+                        return Donation(
+                            id: doc.documentID,
+                            title: d["title"] as? String ?? "",
+                            description: d["description"] as? String ?? "", // Fetch description
+                            expiryDate: (d["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
+                            status: d["status"] as? String ?? "", // Fetch the status
+                            latitude: d["latitude"] as? Double ?? 0,
+                            longitude: d["longitude"] as? Double ?? 0,
+                            acceptedBy: d["acceptedBy"] as? String,
+                            location: d["location"] as? String ?? "Unknown Location", // Fetch location
+                            startTime: (d["startTime"] as? Timestamp)?.dateValue() ?? Date(), // Fetch startTime
+                            endTime: (d["endTime"] as? Timestamp)?.dateValue() ?? Date() // Fetch endTime
+                        )
+                    } ?? []
+                    self.tableView.reloadData()
                 }
+        }
 
-                self.items = snapshot?.documents.compactMap {
-                    let data = $0.data()
-                    return Donation(
-                        id: $0.documentID,
-                        title: data["title"] as? String ?? "",
-                        description: data["description"] as? String ?? "",
-                        expiryDate: (data["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
-                        status: data["status"] as? String ?? "",
-                        latitude: data["latitude"] as? Double ?? 0,
-                        longitude: data["longitude"] as? Double ?? 0,
-                        acceptedBy: data["acceptedBy"] as? String
-                    )
-                } ?? []
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return items.count
+        }
 
-                self.tableView.reloadData()
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PickupCell", for: indexPath)
+            let donation = items[indexPath.row]
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            cell.textLabel?.text = "\(donation.title) ⏰ \(formatter.string(from: donation.expiryDate))"
+            return cell
+        }
+
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let donation = items[indexPath.row]
+            db.collection("donations").document(donation.id).updateData(["status": "picked"]) { _ in
+                self.loadPickups()
             }
+        }
     }
 
-    // MARK: - TableView DataSource
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PickupCell", for: indexPath) as! PickupCell
-        
-        let donation = items[indexPath.row]
-        
-        cell.configure(with: donation)
-        cell.onPickTapped = { [weak self] in
-                self?.markAsPicked(donationId: donation.id)
-            }
-
-        // Show title and formatted expiry date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        cell.textLabel?.text = "\(donation.title) ⏰ \(dateFormatter.string(from: donation.expiryDate))"
-
-        return cell
-    }
-    
-    
-
-    // MARK: - TableView Delegate
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let donation = items[indexPath.row]
-        db.collection("donations").document(donation.id)
-            .updateData(["status": "picked"]) { error in
-                if let error = error {
-                    print("Error updating status: \(error)")
-                } else {
-                    print("Donation picked successfully")
-                    self.loadPickups() // reload table
-                }
-            }
-    }
-}

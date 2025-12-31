@@ -9,101 +9,79 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class AvailableDonationsViewController: UIViewController,
-                                        UITableViewDelegate,
-                                        UITableViewDataSource,
-                                        DonationCellDelegate,
-                                        UISearchBarDelegate{
+class AvailableDonationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, DonationCellDelegate {
+
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var donations: [Donation] = []
-       var filteredDonations: [Donation] = []
-
-       let db = Firestore.firestore()
+        let db = Firestore.firestore()
+        var donations: [Donation] = []
+        var filteredDonations: [Donation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
-        tableView.dataSource = self
-        searchBar.delegate = self
-        fetchDonations()
+                tableView.dataSource = self
+                searchBar.delegate = self
+                fetchDonations()
         
     }
     
     func fetchDonations() {
-        db.collection("donations")
-            .whereField("status", isEqualTo: "pending")
-            .getDocuments { snap, error in
-                if let error = error {
-                    print("Error fetching donations: \(error)")
-                    return
-                }
-
-                self.donations = snap?.documents.compactMap {
-                    let data = $0.data()
-                    return Donation(
-                        id: $0.documentID,
-                        title: data["title"] as? String ?? "",
-                        description: data["description"] as? String ?? "",
-                        expiryDate: (data["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
-                        status: data["status"] as? String ?? "",
-                        latitude: data["latitude"] as? Double ?? 0,
-                        longitude: data["longitude"] as? Double ?? 0,
-                        acceptedBy: data["acceptedBy"] as? String
-                    )
-                } ?? []
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+        db.collection("donations").whereField("status", isEqualTo: "pending").getDocuments { snap, _ in
+            guard let docs = snap?.documents else { return }
+            self.donations = docs.map { doc in
+                let d = doc.data()
+                return Donation(
+                    id: doc.documentID,
+                    title: d["title"] as? String ?? "",
+                    description: d["description"] as? String ?? "",
+                    expiryDate: (d["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
+                    status: d["status"] as? String ?? "",
+                    latitude: d["latitude"] as? Double ?? 0,
+                    longitude: d["longitude"] as? Double ?? 0,
+                    acceptedBy: d["acceptedBy"] as? String,
+                    location: d["location"] as? String ?? "Unknown Location", // Ensure location is present
+                    startTime: (d["startTime"] as? Timestamp)?.dateValue() ?? Date(), // Retrieve start time
+                    endTime: (d["endTime"] as? Timestamp)?.dateValue() ?? Date() // Retrieve end time
+                )
             }
-        self.filteredDonations = self.donations
-                      self.tableView.reloadData()
+            self.filteredDonations = self.donations
+            self.tableView.reloadData()
+        }
     }
-    
-    
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            filteredDonations.count
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return filteredDonations.count
         }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath) as! DonationCell
-        let donation = donations[indexPath.row]
-        cell.configure(with: donation)
-        cell.delegate = self
-        return cell
-    }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DonationCell", for: indexPath) as! DonationCell
+            cell.configure(with: filteredDonations[indexPath.row])
+            cell.delegate = self
+            return cell
+        }
 
-        // MARK: - Accept Donation
-    func didTapAccept(donation: Donation) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "DonationDetailsVC") as! DonationDetailsViewController
+            vc.donation = filteredDonations[indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
+        }
 
-        db.collection("donations").document(donation.id)
-            .updateData([
+        func didTapAccept(donation: Donation) {
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+
+            db.collection("donations").document(donation.id).updateData([
                 "status": "accepted",
                 "acceptedBy": uid
-            ]) { error in
-                if let error = error {
-                    print("Error:", error)
-                } else {
-                    self.donations.removeAll { $0.id == donation.id }
-                    self.tableView.reloadData()
-                }
+            ]) { _ in
+                self.fetchDonations()
             }
-    }
+        }
 
-        // MARK: - Search
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            if searchText.isEmpty {
-                filteredDonations = donations
-            } else {
-                filteredDonations = donations.filter {
-                    $0.title.lowercased().contains(searchText.lowercased())
-                }
-            }
+        func searchBar(_ searchBar: UISearchBar, textDidChange text: String) {
+            filteredDonations = text.isEmpty ? donations : donations.filter { $0.title.lowercased().contains(text.lowercased()) }
             tableView.reloadData()
         }
     }

@@ -21,7 +21,7 @@ class DonationCell: UITableViewCell {
     @IBOutlet weak var acceptButton: UIButton!
     
     weak var delegate: DonationCellDelegate?
-        var donation: Donation?
+        private var donation: Donation!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,22 +42,16 @@ class DonationCell: UITableViewCell {
     }
     
     func configure(with donation: Donation) {
-        self.donation = donation
-        titleLabel.text = donation.title
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        expiryLabel.text = "⏰ Expires: \(formatter.string(from: donation.expiryDate))"
-        
-        // Optional: hide distance if you don’t use it
-        distanceLabel.isHidden = true
-        
-        foodImageView.image = UIImage(named: "food_placeholder")
-    }
+            self.donation = donation
+            titleLabel.text = donation.title
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            expiryLabel.text = "⏰ Expires: \(formatter.string(from: donation.expiryDate))"
+        }
+    
     
     @IBAction func acceptTapped(_ sender: UIButton) {
-        guard let donation = donation else { return }
         delegate?.didTapAccept(donation: donation)
+            }
     }
-}
