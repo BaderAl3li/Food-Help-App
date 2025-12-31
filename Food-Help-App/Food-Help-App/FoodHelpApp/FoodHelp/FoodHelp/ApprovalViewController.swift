@@ -28,6 +28,8 @@ class ApprovalViewController: UIViewController {
             Firestore.firestore()
                 .collection("users")
                 .whereField("status", isEqualTo: "pending")
+                .whereField("role", isEqualTo:
+                    "donor")
                 .limit(to: 1)
                 .getDocuments { snapshot, error in
 
@@ -47,7 +49,7 @@ class ApprovalViewController: UIViewController {
 
                                 self.currentUserId = doc.documentID
 
-                                self.fNameLabel?.text = data["fName"] as? String ?? "-"
+                                self.fNameLabel?.text = data["donor name"] as? String ?? "-"
                                 self.emailLabel?.text = data["email"] as? String ?? "-"
                                 self.numberLabel?.text = data["number"] as? String ?? "-"
 

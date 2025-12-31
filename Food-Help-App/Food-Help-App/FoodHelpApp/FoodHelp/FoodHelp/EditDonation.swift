@@ -79,8 +79,10 @@ class EditDonation: UIViewController {
         ]
 
         Firestore.firestore()
-            .collection("Donations")
+            .collection("users")
             .document(docId)
+            .collection("food_donations")
+            .document(donationId)
             .updateData(updatedData) { _ in
                 self.navigationController?.popViewController(animated: true)
             }
