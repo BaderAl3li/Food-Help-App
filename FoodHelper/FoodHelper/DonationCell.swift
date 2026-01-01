@@ -16,9 +16,8 @@ class DonationCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var expiryLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var donorLabel: UILabel!
     
     weak var delegate: DonationCellDelegate?
         private var donation: Donation!
@@ -38,20 +37,22 @@ class DonationCell: UITableViewCell {
         foodImageView.layer.cornerRadius = 8
         foodImageView.clipsToBounds = true
         
-        acceptButton.layer.cornerRadius = 8
+        cardView.layer.borderWidth = 1
+        cardView.layer.borderColor = UIColor.purple.cgColor
+        
     }
     
     func configure(with donation: Donation) {
-            self.donation = donation
-            titleLabel.text = donation.title
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .short
-            expiryLabel.text = "⏰ Expires: \(formatter.string(from: donation.expiryDate))"
-        }
+        titleLabel.text = donation.title
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium   // e.g. Feb 6, 2026
+        formatter.timeStyle = .none
+
+        let expiryText = formatter.string(from: donation.expiryDate)
+
+        detailLabel.text = "\(donation.quantity) Plates • Expires \(expiryText)"
+        donorLabel.text = donation.donorName
+    }
     
-    
-    @IBAction func acceptTapped(_ sender: UIButton) {
-        delegate?.didTapAccept(donation: donation)
-            }
     }

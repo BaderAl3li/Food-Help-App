@@ -15,24 +15,37 @@ class DonationDetailsViewController: UIViewController {
         @IBOutlet weak var expiryLabel: UILabel!
         @IBOutlet weak var acceptButton: UIButton!
     
-        @IBOutlet weak var quantity: UILabel!
+        @IBOutlet weak var quantityLabel: UILabel!
         
-        @IBOutlet weak var `Type`: UILabel!
+        @IBOutlet weak var typeLabel: UILabel!
     
-        @IBOutlet weak var doner: UILabel!
-        @IBOutlet weak var phoneNumber: UILabel!
+        @IBOutlet weak var donorNameLabel: UILabel!
+        @IBOutlet weak var phoneLabel: UILabel!
     
-        @IBOutlet weak var Location: UILabel!
+        @IBOutlet weak var addressLabel: UILabel!
     
-        @IBOutlet weak var Note: UILabel!
+        @IBOutlet weak var notesLabel: UILabel!
     
+    @IBOutlet weak var itemInfoView: UIView!
+    
+    @IBOutlet weak var donerInfoView: UIView!
     var donation: Donation!
         let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-               displayDonationDetails()
+        bindData()
+        
+        
+        itemInfoView.layer.borderWidth = 1
+        itemInfoView.layer.borderColor = UIColor.purple.cgColor
+        itemInfoView.layer.cornerRadius = 10
+        
+        donerInfoView.layer.borderWidth = 1
+        donerInfoView.layer.borderColor = UIColor.purple.cgColor
+        donerInfoView.layer.cornerRadius = 10
+        
            }
 
            private func setupUI() {
@@ -41,29 +54,41 @@ class DonationDetailsViewController: UIViewController {
                acceptButton.setTitleColor(.white, for: .normal)
            }
 
-    private func displayDonationDetails() {
+    func bindData() {
             titleLabel.text = donation.title
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .short
-            expiryLabel.text = "⏰ Expires: \(dateFormatter.string(from: donation.expiryDate))"
+            quantityLabel.text = "Quantity: \(donation.quantity)"
+            typeLabel.text = "Type: \(donation.itemType)"
+
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            expiryLabel.text = "Expires: \(formatter.string(from: donation.expiryDate))"
+
+            donorNameLabel.text = donation.donorName
+            phoneLabel.text = "📞 \(donation.phoneNumber)"
+            addressLabel.text =
+                "Building \(donation.building), Road \(donation.road)"
+
+            notesLabel.text = donation.description
         }
 
-        @IBAction func acceptTapped(_ sender: UIButton) {
-            guard let uid = Auth.auth().currentUser?.uid else { return }
-            db.collection("donations").document(donation.id).updateData([
-                "status": "accepted",
-                "acceptedBy": uid
-            ]) { error in
-                if let error = error {
-                    print("Error accepting donation: \(error)")
-                } else {
-                    let alert = UIAlertController(title: "Success", message: "Donation accepted successfully.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+    @IBAction func acceptTapped(_ sender: UIButton) {
+
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        db.collection("users").document(uid).getDocument { snap, error in
+            guard let data = snap?.data(),
+                  let ngoName = data["org name"] as? String else { return }
+
+            self.db.collection("donations")
+                .document(self.donation.id)
+                .updateData([
+                    "status": "accepted",
+                    "acceptedBy": ngoName
+                ]) { error in
+                    if error == nil {
                         self.navigationController?.popViewController(animated: true)
-                    })
-                    self.present(alert, animated: true)
+                    }
                 }
-            }
         }
+    }
     }

@@ -15,9 +15,9 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var ngoNameLabel: UILabel!
         @IBOutlet weak var verifiedLabel: UILabel!
 
-        @IBOutlet weak var pendingCountLabel: UILabel!
-        @IBOutlet weak var pickedCountLabel: UILabel!
-        @IBOutlet weak var totalCountLabel: UILabel!
+        @IBOutlet weak var pendingLabel: UILabel!
+        @IBOutlet weak var pickedLabel: UILabel!
+        @IBOutlet weak var totalLabel: UILabel!
 
     
     @IBOutlet weak var PendingView: UIView!
@@ -31,32 +31,50 @@ class DashboardViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             loadNGOInfo()
-            loadNGOInfo()
-                        
             loadStats()
+            
+            PendingView.layer.cornerRadius = 10
+            TotalView.layer.cornerRadius = 10
+            PickedView.layer.cornerRadius = 10
+            WelcomeView.layer.cornerRadius = 10
+            
+            WelcomeView.layer.borderWidth = 1
+            WelcomeView.layer.borderColor = UIColor.purple.cgColor
+
         }
 
-    func loadNGOInfo() {
+        func loadNGOInfo() {
             db.collection("users").document(uid).getDocument { snap, _ in
                 guard let data = snap?.data() else { return }
+
                 self.ngoNameLabel.text = data["org name"] as? String ?? "NGO"
-                let approved = (data["status"] as? String) == "approved"
+                let approved = data["status"] as? String == "approved"
                 self.verifiedLabel.text = approved ? "Verified NGO" : "Not Verified"
                 self.verifiedLabel.textColor = approved ? .systemGreen : .systemRed
             }
         }
 
         func loadStats() {
-            db.collection("donations").whereField("status", isEqualTo: "pending").getDocuments { snap, _ in
-                self.pendingCountLabel.text = "\(snap?.count ?? 0)"
-            }
 
-            db.collection("donations").whereField("acceptedBy", isEqualTo: self.uid).whereField("status", isEqualTo: "picked").getDocuments { snap, _ in
-                self.pickedCountLabel.text = "\(snap?.count ?? 0)"
-            }
+            // Pending
+            db.collection("donations")
+                .whereField("status", isEqualTo: "pending")
+                .getDocuments { snap, _ in
+                    self.pendingLabel.text = "\(snap?.count ?? 0)"
+                }
 
-            db.collection("donations").getDocuments { snap, _ in
-                self.totalCountLabel.text = "\(snap?.count ?? 0)"
-            }
+            // Picked by this NGO
+            db.collection("donations")
+                .whereField("acceptedBy", isEqualTo: "New Org")
+                .whereField("status", isEqualTo: "picked")
+                .getDocuments { snap, _ in
+                    self.pickedLabel.text = "\(snap?.count ?? 0)"
+                }
+
+            // Total
+            db.collection("donations")
+                .getDocuments { snap, _ in
+                    self.totalLabel.text = "\(snap?.count ?? 0)"
+                }
         }
     }

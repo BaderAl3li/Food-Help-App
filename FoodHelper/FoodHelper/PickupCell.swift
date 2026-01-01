@@ -14,41 +14,29 @@ class PickupCell: UITableViewCell {
     @IBOutlet weak var pickupButton: UIButton!
     
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var donorLabel: UILabel!
     
+    @IBOutlet weak var PickupView: UIView!
     var onPickTapped: (() -> Void)?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setupUI()
-    }
-    
-    private func setupUI() {
-        foodImageView.layer.cornerRadius = 10
-        foodImageView.clipsToBounds = true
-        
-        pickupButton.layer.cornerRadius = 8
-        pickupButton.setTitle("Pickup Complete", for: .normal)
-        pickupButton.backgroundColor = UIColor.systemBlue
-        pickupButton.setTitleColor(.white, for: .normal)
-    }
-    
-    @IBAction func pickButtonTapped(_ sender: UIButton) {
-        onPickTapped?()
-        
-        func configure(with donation: Donation) {
-            titleLabel.text = donation.title
+
+        override func awakeFromNib() {
+            super.awakeFromNib()
+            foodImageView.layer.cornerRadius = 10
+           
+            PickupView.layer.cornerRadius = 10
+            PickupView.layer.borderWidth = 1
+            PickupView.layer.borderColor = UIColor.purple.cgColor
             
-            let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm" // Set format to 24-hour
-            let startTimeString = formatter.string(from: donation.startTime)
-            let endTimeString = formatter.string(from: donation.endTime)
-            locationLabel.text = "Location: \(donation.location)" // Set location
-            timeLabel.text = "Available: from \(startTimeString) to \(endTimeString)" // Display time range
             
-            foodImageView.image = UIImage(named: "food_placeholder") // Placeholder image
         }
 
+        func configure(with donation: Donation) {
+            titleLabel.text = donation.title
+            timeLabel.text = "\(donation.timeOpen) - \(donation.timeClose)"
+            donorLabel.text = donation.donorName
+        }
+
+        @IBAction func pickTapped(_ sender: UIButton) {
+            onPickTapped?()
+        }
     }
-}

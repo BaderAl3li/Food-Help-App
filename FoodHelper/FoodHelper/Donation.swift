@@ -7,20 +7,24 @@
 
 import FirebaseFirestore
 
-import Foundation
-
-import Foundation
-
 struct Donation {
     let id: String
     let title: String
     let description: String
+    let quantity: Int
+    let itemType: String
     let expiryDate: Date
-    let status: String
+    let timeOpen: String
+    let timeClose: String
+
+    let donorName: String
+    let phoneNumber: Int
+    let building: Int
+    let road: Int
+
     let latitude: Double
     let longitude: Double
+
+    let status: String
     let acceptedBy: String?
-    let location: String
-    let startTime: Date
-    let endTime: Date
 }
