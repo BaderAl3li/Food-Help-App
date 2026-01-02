@@ -214,7 +214,7 @@
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" title="Details"/>
                                                             <connections>
-                                                                <segue destination="9Ev-jv-FA4" kind="showDetail" id="fOw-ud-J6L"/>
+                                                                <action selector="detailsTapped:" destination="4lj-Ir-91s" eventType="touchUpInside" id="FZJ-Tx-9xQ"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -250,6 +250,7 @@
                                         <connections>
                                             <outlet property="cardView" destination="RDr-Hj-Hhu" id="9GD-zM-NFn"/>
                                             <outlet property="detailLabel" destination="QuC-Yc-09N" id="iME-5E-ZK8"/>
+                                            <outlet property="detailsButton" destination="Kjx-gP-uDe" id="vNb-8g-8ze"/>
                                             <outlet property="donorLabel" destination="ghj-LA-Jr9" id="V64-Ba-fhN"/>
                                             <outlet property="foodImageView" destination="t2U-Jg-Cef" id="M3f-68-MVs"/>
                                             <outlet property="titleLabel" destination="lGE-Ez-f30" id="FFd-9S-XSv"/>
@@ -452,7 +453,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Twq-Ef-0P6"/>
                     <connections>
-                        <outlet property="accept" destination="wVA-0j-tVB" id="bWv-Xx-AGQ"/>
                         <outlet property="acceptButton" destination="wVA-0j-tVB" id="tsI-4n-1nY"/>
                         <outlet property="addressLabel" destination="6CR-7p-xVM" id="pPe-4E-e8j"/>
                         <outlet property="donerInfoView" destination="8SA-yc-sJ3" id="ZlF-c6-YeP"/>

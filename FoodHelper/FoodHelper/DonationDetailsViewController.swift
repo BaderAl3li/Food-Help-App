@@ -28,13 +28,14 @@ class DonationDetailsViewController: UIViewController {
     
     @IBOutlet weak var itemInfoView: UIView!
     
-    @IBOutlet weak var accept: UIButton!
     @IBOutlet weak var donerInfoView: UIView!
     var donation: Donation!
         let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Donation is nil?", donation == nil)
         setupUI()
         bindData()
         

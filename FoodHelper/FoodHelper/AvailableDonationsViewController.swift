@@ -51,10 +51,10 @@ class AvailableDonationsViewController: UIViewController,
                             expiryDate: (d["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
                             timeOpen: d["timeOpen"] as? String ?? "",
                             timeClose: d["timeClose"] as? String ?? "",
-                            donorName: d["donatBy"] as? String ?? "",   // ✅ FIXED
-                            phoneNumber: d["PhoneNumber"] as? Int ?? 0, // ✅ FIXED
-                            building: d["Building"] as? Int ?? 0,       // ✅ FIXED
-                            road: d["Road"] as? Int ?? 0,               // ✅ FIXED
+                            donorName: d["donatBy"] as? String ?? "",
+                            phoneNumber: d["PhoneNumber"] as? Int ?? 0,
+                            building: d["Building"] as? Int ?? 0,
+                            road: d["Road"] as? Int ?? 0,
                             latitude: d["latitude"] as? Double ?? 0,
                             longitude: d["longitude"] as? Double ?? 0,
                             status: d["status"] as? String ?? "",       // or itemStatus if you prefer
@@ -73,30 +73,37 @@ class AvailableDonationsViewController: UIViewController,
                        numberOfRowsInSection section: Int) -> Int {
             filtered.count
         }
-
-        func tableView(_ tableView: UITableView,
-                       cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "FoodCell",
-                for: indexPath
-            ) as! DonationCell
-
-            cell.configure(with: filtered[indexPath.row])
-            return cell
-        }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedDonation = filtered[indexPath.row]
+    
 
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "FoodCell",
+            for: indexPath
+        ) as! DonationCell
+
+        let donation = filtered[indexPath.row]
+        cell.configure(with: donation)
+
+        cell.onDetailsTapped = { [weak self] in
+            guard let self = self else { return }
+            self.showDonationDetails(donation)
+        }
+        return cell
+    }
+    
+    func showDonationDetails(_ donation: Donation) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(
             withIdentifier: "DonationDetailsViewController"
         ) as! DonationDetailsViewController
 
-        vc.donation = selectedDonation
+        vc.donation = donation
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 
         // MARK: - Search
 
