@@ -12,7 +12,8 @@ import FirebaseAuth
 class AvailableDonationsViewController: UIViewController,
                                         UITableViewDelegate,
                                         UITableViewDataSource,
-                                        UISearchBarDelegate {
+                                        UISearchBarDelegate,
+                                        DonationCellDelegate {
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -69,41 +70,51 @@ class AvailableDonationsViewController: UIViewController,
 
         // MARK: - TableView
 
-        func tableView(_ tableView: UITableView,
+    func tableView(_ tableView: UITableView,
                        numberOfRowsInSection section: Int) -> Int {
             filtered.count
         }
-    
-    
 
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        func tableView(_ tableView: UITableView,
+                       cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "FoodCell",
-            for: indexPath
-        ) as! DonationCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "FoodCell",
+                for: indexPath
+            ) as! DonationCell
 
-        let donation = filtered[indexPath.row]
-        cell.configure(with: donation)
+            let donation = filtered[indexPath.row]
+            cell.configure(with: donation)
+            cell.delegate = self
 
-        cell.onDetailsTapped = { [weak self] in
-            guard let self = self else { return }
-            self.showDonationDetails(donation)
+            return cell
         }
-        return cell
-    }
-    
-    func showDonationDetails(_ donation: Donation) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: "DonationDetailsViewController"
-        ) as! DonationDetailsViewController
 
-        vc.donation = donation
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
+        // MARK: - Accept logic
+
+        func didTapAccept(donation: Donation) {
+
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+
+            db.collection("users").document(uid).getDocument { [weak self] snap, _ in
+                guard let self = self,
+                      let data = snap?.data(),
+                      let ngoName = data["org name"] as? String else { return }
+
+                self.db.collection("donations")
+                    .document(donation.id)
+                    .updateData([
+                        "status": "accepted",
+                        "acceptedBy": ngoName
+                    ]) { error in
+                        if error == nil {
+                            self.filtered.removeAll { $0.id == donation.id }
+                            self.donations.removeAll { $0.id == donation.id }
+                            self.tableView.reloadData()
+                        }
+                    }
+            }
+        }
 
         // MARK: - Search
 
@@ -111,10 +122,10 @@ class AvailableDonationsViewController: UIViewController,
                        textDidChange searchText: String) {
 
             filtered = searchText.isEmpty
-            ? donations
-            : donations.filter {
-                $0.title.lowercased().contains(searchText.lowercased())
-            }
+                ? donations
+                : donations.filter {
+                    $0.title.lowercased().contains(searchText.lowercased())
+                }
 
             tableView.reloadData()
         }
