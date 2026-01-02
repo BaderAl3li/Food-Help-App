@@ -24,6 +24,9 @@ class AvailableDonationsViewController: UIViewController,
     
     override func viewDidLoad() {
             super.viewDidLoad()
+        
+            tableView.rowHeight = UITableView.automaticDimension
+           tableView.estimatedRowHeight = 140
 
             tableView.delegate = self
             tableView.dataSource = self
@@ -48,13 +51,13 @@ class AvailableDonationsViewController: UIViewController,
                             expiryDate: (d["expiryDate"] as? Timestamp)?.dateValue() ?? Date(),
                             timeOpen: d["timeOpen"] as? String ?? "",
                             timeClose: d["timeClose"] as? String ?? "",
-                            donorName: d["donatBy"] as? String ?? "",
-                            phoneNumber: d["PhoneNumber"] as? Int ?? 0,
-                            building: d["Building"] as? Int ?? 0,
-                            road: d["Road"] as? Int ?? 0,
+                            donorName: d["donatBy"] as? String ?? "",   // ✅ FIXED
+                            phoneNumber: d["PhoneNumber"] as? Int ?? 0, // ✅ FIXED
+                            building: d["Building"] as? Int ?? 0,       // ✅ FIXED
+                            road: d["Road"] as? Int ?? 0,               // ✅ FIXED
                             latitude: d["latitude"] as? Double ?? 0,
                             longitude: d["longitude"] as? Double ?? 0,
-                            status: d["status"] as? String ?? "",
+                            status: d["status"] as? String ?? "",       // or itemStatus if you prefer
                             acceptedBy: d["acceptedBy"] as? String
                         )
                     } ?? []
@@ -75,13 +78,25 @@ class AvailableDonationsViewController: UIViewController,
                        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "DonationCardCell",
+                withIdentifier: "FoodCell",
                 for: indexPath
             ) as! DonationCell
 
             cell.configure(with: filtered[indexPath.row])
             return cell
         }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedDonation = filtered[indexPath.row]
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: "DonationDetailsViewController"
+        ) as! DonationDetailsViewController
+
+        vc.donation = selectedDonation
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
         // MARK: - Search
 

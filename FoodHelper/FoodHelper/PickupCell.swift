@@ -21,6 +21,7 @@ class PickupCell: UITableViewCell {
 
         override func awakeFromNib() {
             super.awakeFromNib()
+            
             foodImageView.layer.cornerRadius = 10
            
             PickupView.layer.cornerRadius = 10

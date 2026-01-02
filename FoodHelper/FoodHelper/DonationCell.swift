@@ -24,22 +24,24 @@ class DonationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupUI()
     }
     
     func setupUI() {
+        // Card styling
         cardView.layer.cornerRadius = 14
         cardView.layer.shadowColor = UIColor.black.cgColor
         cardView.layer.shadowOpacity = 0.1
         cardView.layer.shadowOffset = CGSize(width: 0, height: 4)
         cardView.layer.shadowRadius = 6
-        
+
         foodImageView.layer.cornerRadius = 8
         foodImageView.clipsToBounds = true
-        
-        cardView.layer.borderWidth = 1
-        cardView.layer.borderColor = UIColor.purple.cgColor
-        
+
+        // Required for dynamic height
+        titleLabel.numberOfLines = 0
+        detailLabel.numberOfLines = 0
+        donorLabel.numberOfLines = 1
     }
     
     func configure(with donation: Donation) {
@@ -53,6 +55,4 @@ class DonationCell: UITableViewCell {
 
         detailLabel.text = "\(donation.quantity) Plates • Expires \(expiryText)"
         donorLabel.text = donation.donorName
-    }
-    
-    }
+    }}

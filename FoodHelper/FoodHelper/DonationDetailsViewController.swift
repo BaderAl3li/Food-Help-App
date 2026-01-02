@@ -28,6 +28,7 @@ class DonationDetailsViewController: UIViewController {
     
     @IBOutlet weak var itemInfoView: UIView!
     
+    @IBOutlet weak var accept: UIButton!
     @IBOutlet weak var donerInfoView: UIView!
     var donation: Donation!
         let db = Firestore.firestore()
@@ -37,21 +38,20 @@ class DonationDetailsViewController: UIViewController {
         setupUI()
         bindData()
         
-        
-        itemInfoView.layer.borderWidth = 1
-        itemInfoView.layer.borderColor = UIColor.purple.cgColor
-        itemInfoView.layer.cornerRadius = 10
-        
-        donerInfoView.layer.borderWidth = 1
-        donerInfoView.layer.borderColor = UIColor.purple.cgColor
-        donerInfoView.layer.cornerRadius = 10
-        
            }
 
-           private func setupUI() {
+           func setupUI() {
                acceptButton.layer.cornerRadius = 8
                acceptButton.backgroundColor = .systemGreen
                acceptButton.setTitleColor(.white, for: .normal)
+               
+               itemInfoView.layer.borderWidth = 1
+               itemInfoView.layer.borderColor = UIColor.purple.cgColor
+               itemInfoView.layer.cornerRadius = 10
+               
+               donerInfoView.layer.borderWidth = 1
+               donerInfoView.layer.borderColor = UIColor.purple.cgColor
+               donerInfoView.layer.cornerRadius = 10
            }
 
     func bindData() {
