@@ -29,7 +29,7 @@ class ManageUsers: UIViewController,
     func fetchUsers() {
         Firestore.firestore()
             .collection("users")
-            .getDocuments { snapshot, _ in
+            .whereField("role", isEqualTo: "donor")            .getDocuments { snapshot, _ in
 
                 guard let documents = snapshot?.documents else {
                     return
