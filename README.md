@@ -68,6 +68,7 @@
 
 - **All:** Changed the navbar for all the pages so its easier to access areas consistently
 - **Ali:** Deleted details page because it was deemed useless, removed the urgently view and nearby in the dashboard as it provided redundant data, the pickup page moved to the navbar due to ease of access and the map moved to the navbar for easier accessibility.
+- **Bader:** 
 - **Hasan:** Removed Messages page
 - **Aqeel:** Changed payment page structure, removed one chart, and added payment confirmation UI
 
@@ -84,3 +85,8 @@ Simply run **Xcode**. From there, you will be in the **Login Page** where you ca
 ## Simulators Used for Testing the Application
 
 - **iPhone 16**
+
+## Email and Password for the Admin
+
+- **Email:** admin@foodapp.com
+- **Password:** foodappadmin12
