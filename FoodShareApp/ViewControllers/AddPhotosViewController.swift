@@ -1,0 +1,1 @@
+// This file is intentionally left empty as the AddPhotosViewController class is now defined in DonationViewControllers.swift
