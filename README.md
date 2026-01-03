@@ -68,7 +68,7 @@
 
 - **All:** Changed the navbar for all the pages so its easier to access areas consistently
 - **Ali:** Deleted details page because it was deemed useless, removed the urgently view and nearby in the dashboard as it provided redundant data, the pickup page moved to the navbar due to ease of access and the map moved to the navbar for easier accessibility.
-- **Bader:** 
+- **Bader:** Both manage donations and users removed the home button and put a menu top left to maintain consistency throughout the pages. Removed last name fields as it felt like extra details for no particular reason.
 - **Hasan:** Removed Messages page
 - **Aqeel:** Changed payment page structure, removed one chart, and added payment confirmation UI
 
