@@ -2,7 +2,11 @@
 
 ## Github Link
 
+* **https://github.com/BaderAl3li/Food-Help-App.git**
+* **https://github.com/BaderAl3li/Food-Help-App**
+
 ## Group Members
+
 - Bader Alali
 - Hussain Nader
 - Hasan Ali
@@ -61,16 +65,20 @@
   - **Tester:** Murtadha Al Hamali, 202302401
 
 ## Design Changes
+
 - **Hasan:** Removed Messages page
 - **Aqeel:** Changed payment page structure, removed one chart, and added payment confirmation UI
 
 ## Libraries, Packages, and External Code Implementations
+
 - **SDWebImage**
 - **DGCharts**
 - **Firebase**
 
 ## Description of the Steps to Setup the Project
+
 Simply run **Xcode**. From there, you will be in the **Login Page** where you can choose to either **Sign Up** or **Sign In** as a specific role (Admin, User, or NGO).
 
 ## Simulators Used for Testing the Application
+
 - **iPhone 16**
