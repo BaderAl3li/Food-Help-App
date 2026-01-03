@@ -93,7 +93,7 @@ class MyPickupsViewController: UIViewController,
             }
         }
 
-        // MARK: - TableView
+        
 
         func numberOfSections(in tableView: UITableView) -> Int {
             2

@@ -68,7 +68,7 @@ class AvailableDonationsViewController: UIViewController,
                 }
         }
 
-        // MARK: - TableView
+        
 
     func tableView(_ tableView: UITableView,
                        numberOfRowsInSection section: Int) -> Int {
@@ -90,7 +90,7 @@ class AvailableDonationsViewController: UIViewController,
             return cell
         }
 
-        // MARK: - Accept logic
+        
 
         func didTapAccept(donation: Donation) {
 
@@ -116,7 +116,7 @@ class AvailableDonationsViewController: UIViewController,
             }
         }
 
-        // MARK: - Search
+        
 
         func searchBar(_ searchBar: UISearchBar,
                        textDidChange searchText: String) {

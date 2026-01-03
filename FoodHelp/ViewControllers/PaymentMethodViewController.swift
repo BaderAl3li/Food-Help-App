@@ -20,17 +20,13 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet private weak var payButton: UIButton!
 
-    // MARK: - Data
+    
         private var amountBHD: Double = 0
 
         override func viewDidLoad() {
             super.viewDidLoad()
 
-            // If you want card stack hidden until user chooses card:
-            // cardStack.isHidden = true
-            // payButton.isEnabled = false
-
-            // Keyboard + delegates
+            
             amountTF.keyboardType = .decimalPad
             numberTF.keyboardType = .numberPad
             expiryTF.keyboardType = .numberPad
@@ -42,12 +38,12 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
             expiryTF.delegate = self
             cvvTF.delegate = self
 
-            // Make SF symbol bigger
+           
             let config = UIImage.SymbolConfiguration(pointSize: 34, weight: .medium)
             cardImageView.image = UIImage(systemName: "creditcard.fill", withConfiguration: config)
             cardImageView.tintColor = .label
 
-            // Styling (optional)
+            
             [amountTF, nameTF, numberTF, expiryTF, cvvTF].forEach { tf in
                 tf?.layer.cornerRadius = 10
                 tf?.layer.borderWidth = 1
@@ -59,9 +55,9 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
             payButton.layer.cornerRadius = 10
         }
 
-        // MARK: - Actions
+        
 
-        /// Use only if you still have a "Card" selection button
+       
         @IBAction private func cardTapped(_ sender: UIButton) {
             cardStack.isHidden = false
             payButton.isEnabled = true
@@ -75,13 +71,13 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
         }
 
         @IBAction private func payTapped(_ sender: UIButton) {
-            // Validate amount
+            
             guard let txt = amountTF.text, let value = Double(txt), value > 0 else {
                 alert("Enter a valid amount")
                 return
             }
 
-            // Validate fields
+            
             let holder = (nameTF.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
             if holder.isEmpty { alert("Enter card holder name"); return }
 
@@ -93,7 +89,7 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
             let cvv = cvvTF.text ?? ""
             if !(cvv.count == 3 || cvv.count == 4) { alert("CVV must be 3 or 4 digits"); return }
 
-            // Demo note: Do NOT store CVV anywhere in real apps.
+            
             amountBHD = value
 
             performSegue(withIdentifier: "toOTP", sender: self)
@@ -106,15 +102,15 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-        // MARK: - Formatting + limits (BHD 3 decimals, card spacing, MM/YY, CVV length)
+        
 
         func textField(_ textField: UITextField,
                        shouldChangeCharactersIn range: NSRange,
                        replacementString string: String) -> Bool {
 
-            if string.isEmpty { return true } // backspace
+            if string.isEmpty { return true }
 
-            // Amount: digits + one dot, max 3 decimals
+            
             if textField == amountTF {
                 let current = textField.text ?? ""
                 let updated = (current as NSString).replacingCharacters(in: range, with: string)
@@ -131,14 +127,14 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
                 return true
             }
 
-            // Only digits for number/expiry/cvv
+            
             if textField == numberTF || textField == expiryTF || textField == cvvTF {
                 if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) != nil {
                     return false
                 }
             }
 
-            // Card number formatting #### #### #### ####
+            
             if textField == numberTF {
                 let current = textField.text ?? ""
                 let updated = (current as NSString).replacingCharacters(in: range, with: string)
@@ -154,7 +150,7 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
                 return false
             }
 
-            // Expiry formatting MM/YY
+            
             if textField == expiryTF {
                 let current = textField.text ?? ""
                 let updated = (current as NSString).replacingCharacters(in: range, with: string)
@@ -170,7 +166,7 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
                 return false
             }
 
-            // CVV max 4
+            
             if textField == cvvTF {
                 let current = textField.text ?? ""
                 let updated = (current as NSString).replacingCharacters(in: range, with: string)
@@ -197,7 +193,7 @@ class PaymentMethodViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    // MARK: - Padding helper
+    
 private extension UITextField {
     func setLeftPadding(_ value: CGFloat) {
         let v = UIView(frame: CGRect(x: 0, y: 0, width: value, height: 1))

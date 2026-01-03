@@ -37,7 +37,7 @@ class MapViewController: UIViewController , MKMapViewDelegate {
             mapView.layer.shadowRadius = 6
         }
 
-       // MARK: - Fetch NGO Name First
+       
 
        func fetchNGOAndLoadDonations() {
            guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -51,7 +51,7 @@ class MapViewController: UIViewController , MKMapViewDelegate {
            }
        }
 
-       // MARK: - Load Accepted Donations
+       
 
        func loadAcceptedDonations(ngoName: String) {
 
@@ -85,12 +85,12 @@ class MapViewController: UIViewController , MKMapViewDelegate {
                        }
                    }
 
-                   // Optional: zoom to pins
+                   
                    self.zoomToAnnotations()
                }
        }
 
-       // MARK: - Zoom Helper
+       
 
        func zoomToAnnotations() {
            let annotations = mapView.annotations

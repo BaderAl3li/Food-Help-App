@@ -11,20 +11,20 @@ import FirebaseFirestore
 
 final class verifyOTPViewController: UIViewController {
 
-    // MARK: - Outlets
+    
     @IBOutlet private weak var phoneTF: UITextField!
     @IBOutlet private weak var otpTF: UITextField!
     @IBOutlet private weak var sendOTPButton: UIButton!
     @IBOutlet private weak var confirmButton: UIButton!
 
-    // MARK: - Passed from Payment (set this before presenting this screen)
+    
     var amountBHD: Double = 0
 
-    // MARK: - Firebase
+    
     private let db = Firestore.firestore()
     private var verificationID: String?
 
-    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +32,7 @@ final class verifyOTPViewController: UIViewController {
         otpTF.keyboardType = .numberPad
         otpTF.textContentType = .oneTimeCode
 
-        // Styling (optional)
+        
         [phoneTF, otpTF].forEach { tf in
             tf?.layer.cornerRadius = 10
             tf?.layer.borderWidth = 1
@@ -45,7 +45,7 @@ final class verifyOTPViewController: UIViewController {
         confirmButton.layer.cornerRadius = 10
     }
 
-    // MARK: - Actions
+    
 
     @IBAction private func backToPaymentTapped(_ sender: UIButton) {
         dismiss(animated: true)
@@ -68,7 +68,7 @@ final class verifyOTPViewController: UIViewController {
             }
 
             self.verificationID = id
-            self.alert("OTP sent ✅")
+            self.alert("OTP sent")
         }
     }
 
@@ -98,7 +98,6 @@ final class verifyOTPViewController: UIViewController {
         }
     }
 
-    // MARK: - Firestore save
     private func savePaymentAndGoDashboard() {
         let uid = Auth.auth().currentUser?.uid ?? "unknown"
 
@@ -116,11 +115,10 @@ final class verifyOTPViewController: UIViewController {
             }
 
             let a = UIAlertController(title: "Success",
-                                      message: "Payment confirmed ✅",
+                                      message: "Payment confirmed",
                                       preferredStyle: .alert)
 
             a.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                // OTP was presented by Payment, Payment was presented by Dashboard
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true)
             })
 
@@ -128,7 +126,7 @@ final class verifyOTPViewController: UIViewController {
         }
     }
 
-    // MARK: - Alert helper
+    
     private func alert(_ msg: String) {
         let a = UIAlertController(title: "Message", message: msg, preferredStyle: .alert)
         a.addAction(UIAlertAction(title: "OK", style: .default))
@@ -136,7 +134,7 @@ final class verifyOTPViewController: UIViewController {
     }
 }
 
-// MARK: - Padding helper (must be OUTSIDE the class)
+
 private extension UITextField {
     func setLeftPadding(_ value: CGFloat) {
         let v = UIView(frame: CGRect(x: 0, y: 0, width: value, height: 1))

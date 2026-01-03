@@ -34,7 +34,7 @@ class DashboardViewController: UIViewController {
             loadNGOInfo()
         }
 
-        // MARK: - UI
+        
 
         func setupUI() {
             PendingView.layer.cornerRadius = 10
@@ -46,7 +46,7 @@ class DashboardViewController: UIViewController {
             WelcomeView.layer.borderColor = UIColor.purple.cgColor
         }
 
-        // MARK: - NGO Info
+        
 
         func loadNGOInfo() {
             guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -69,11 +69,11 @@ class DashboardViewController: UIViewController {
             }
         }
 
-        // MARK: - Stats
+        
 
         func loadStats(ngoName: String) {
 
-            // Pending donations (global)
+            
             db.collection("donations")
                 .whereField("status", isEqualTo: "pending")
                 .getDocuments { [weak self] snap, _ in
@@ -82,7 +82,7 @@ class DashboardViewController: UIViewController {
                     }
                 }
 
-            // Picked by THIS NGO
+            
             db.collection("donations")
                 .whereField("acceptedBy", isEqualTo: ngoName)
                 .whereField("status", isEqualTo: "picked")
@@ -92,7 +92,7 @@ class DashboardViewController: UIViewController {
                     }
                 }
 
-            // Total accepted by THIS NGO
+            
             db.collection("donations")
                 .whereField("acceptedBy", isEqualTo: ngoName)
                 .getDocuments { [weak self] snap, _ in
