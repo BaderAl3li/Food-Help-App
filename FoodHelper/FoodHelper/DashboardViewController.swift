@@ -26,55 +26,79 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var WelcomeView: UIView!
     
     let db = Firestore.firestore()
-        let uid = Auth.auth().currentUser!.uid
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            loadNGOInfo()
-            loadStats()
-            
-            PendingView.layer.cornerRadius = 10
-            TotalView.layer.cornerRadius = 10
-            PickedView.layer.cornerRadius = 10
-            WelcomeView.layer.cornerRadius = 10
-            
-            WelcomeView.layer.borderWidth = 1
-            WelcomeView.layer.borderColor = UIColor.purple.cgColor
 
+            setupUI()
+            loadNGOInfo()
         }
 
-        func loadNGOInfo() {
-            db.collection("users").document(uid).getDocument { snap, _ in
-                guard let data = snap?.data() else { return }
+        // MARK: - UI
 
-                self.ngoNameLabel.text = data["org name"] as? String ?? "NGO"
-                let approved = data["status"] as? String == "approved"
-                self.verifiedLabel.text = approved ? "Verified NGO" : "Not Verified"
-                self.verifiedLabel.textColor = approved ? .systemGreen : .systemRed
+        func setupUI() {
+            PendingView.layer.cornerRadius = 10
+            PickedView.layer.cornerRadius = 10
+            TotalView.layer.cornerRadius = 10
+            WelcomeView.layer.cornerRadius = 10
+
+            WelcomeView.layer.borderWidth = 1
+            WelcomeView.layer.borderColor = UIColor.purple.cgColor
+        }
+
+        // MARK: - NGO Info
+
+        func loadNGOInfo() {
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+
+            db.collection("users").document(uid).getDocument { [weak self] snap, _ in
+                guard let self = self,
+                      let data = snap?.data(),
+                      let ngoName = data["org name"] as? String else { return }
+
+                DispatchQueue.main.async {
+                    self.ngoNameLabel.text = ngoName
+
+                    let approved = data["status"] as? String == "approved"
+                    self.verifiedLabel.text = approved ? "Verified NGO" : "Not Verified"
+                    self.verifiedLabel.textColor = approved ? .systemGreen : .systemRed
+                }
+
+                // 🔥 Load stats ONLY after we know NGO name
+                self.loadStats(ngoName: ngoName)
             }
         }
 
-        func loadStats() {
+        // MARK: - Stats
 
-            // Pending
+        func loadStats(ngoName: String) {
+
+            // Pending donations (global)
             db.collection("donations")
                 .whereField("status", isEqualTo: "pending")
-                .getDocuments { snap, _ in
-                    self.pendingLabel.text = "\(snap?.count ?? 0)"
+                .getDocuments { [weak self] snap, _ in
+                    DispatchQueue.main.async {
+                        self?.pendingLabel.text = "\(snap?.count ?? 0)"
+                    }
                 }
 
-            // Picked by this NGO
+            // Picked by THIS NGO
             db.collection("donations")
-                .whereField("acceptedBy", isEqualTo: "New Org")
+                .whereField("acceptedBy", isEqualTo: ngoName)
                 .whereField("status", isEqualTo: "picked")
-                .getDocuments { snap, _ in
-                    self.pickedLabel.text = "\(snap?.count ?? 0)"
+                .getDocuments { [weak self] snap, _ in
+                    DispatchQueue.main.async {
+                        self?.pickedLabel.text = "\(snap?.count ?? 0)"
+                    }
                 }
 
-            // Total
+            // Total accepted by THIS NGO
             db.collection("donations")
-                .getDocuments { snap, _ in
-                    self.totalLabel.text = "\(snap?.count ?? 0)"
+                .whereField("acceptedBy", isEqualTo: ngoName)
+                .getDocuments { [weak self] snap, _ in
+                    DispatchQueue.main.async {
+                        self?.totalLabel.text = "\(snap?.count ?? 0)"
+                    }
                 }
         }
     }
