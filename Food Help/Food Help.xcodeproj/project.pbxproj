@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B4F05112F078905003F700B /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F05102F078905003F700B /* PaymentMethodViewController.swift */; };
+		1B4F05152F079958003F700B /* verifyOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F05142F079958003F700B /* verifyOTPViewController.swift */; };
 		1B6C3D562EF1FC9D00592E6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C3D552EF1FC9D00592E6C /* AppDelegate.swift */; };
 		1B6C3D582EF1FC9D00592E6C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C3D572EF1FC9D00592E6C /* SceneDelegate.swift */; };
 		1B6C3D5A2EF1FC9D00592E6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6C3D592EF1FC9D00592E6C /* ViewController.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B4F05102F078905003F700B /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		1B4F05142F079958003F700B /* verifyOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verifyOTPViewController.swift; sourceTree = "<group>"; };
 		1B6C3D522EF1FC9D00592E6C /* Food Help.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Help.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6C3D552EF1FC9D00592E6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B6C3D572EF1FC9D00592E6C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				1B6C3D552EF1FC9D00592E6C /* AppDelegate.swift */,
 				1B6C3D572EF1FC9D00592E6C /* SceneDelegate.swift */,
 				1B6C3D592EF1FC9D00592E6C /* ViewController.swift */,
+				1B4F05142F079958003F700B /* verifyOTPViewController.swift */,
+				1B4F05102F078905003F700B /* PaymentMethodViewController.swift */,
 				1B6C3D5B2EF1FC9D00592E6C /* Main.storyboard */,
 				1BBF2F832F04A2C200BA66C9 /* GoogleService-Info.plist */,
 				1B6C3D5E2EF1FCA000592E6C /* Assets.xcassets */,
@@ -312,7 +318,9 @@
 			files = (
 				1B6C3D5A2EF1FC9D00592E6C /* ViewController.swift in Sources */,
 				1B6C3D562EF1FC9D00592E6C /* AppDelegate.swift in Sources */,
+				1B4F05112F078905003F700B /* PaymentMethodViewController.swift in Sources */,
 				1B6C3D582EF1FC9D00592E6C /* SceneDelegate.swift in Sources */,
+				1B4F05152F079958003F700B /* verifyOTPViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HR68FN6DY2;
@@ -515,6 +524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HR68FN6DY2;

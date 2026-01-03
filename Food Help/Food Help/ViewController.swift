@@ -10,8 +10,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var bigMealsCard: UIView!
     @IBOutlet weak var donationsCard: UIView!
-    @IBOutlet weak var mainCard: UIView!
-    @IBOutlet weak var pieCharView: PieChartView!
     @IBOutlet weak var previousYearTapped: UIButton!
     @IBOutlet weak var nextYearTapped: UIButton!
     
@@ -32,10 +30,9 @@ class ViewController: UIViewController {
 
         styleCard(bigMealsCard)
         styleCard(donationsCard)
-        styleCard(mainCard)
 
         setupBarChartStyle()
-        setupPieChart()
+       
 
         loadYear()
     }
@@ -110,32 +107,6 @@ class ViewController: UIViewController {
         barChartView.data = chartData
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: months)
         barChartView.notifyDataSetChanged()
-    }
-
-    // MARK: - Pie Chart
-    func setupPieChart() {
-        pieCharView.holeRadiusPercent = 0.4
-        pieCharView.chartDescription.enabled = false
-        pieCharView.drawEntryLabelsEnabled = false
-        pieCharView.legend.enabled = true
-
-        setPieChartData()
-    }
-
-    func setPieChartData() {
-        let entries = [
-            PieChartDataEntry(value: 76, label: "Completed"),
-            PieChartDataEntry(value: 24, label: "Remaining")
-        ]
-
-        let dataSet = PieChartDataSet(entries: entries, label: "")
-        dataSet.colors = [
-            UIColor.systemPurple,
-            UIColor.systemGray5
-        ]
-        dataSet.valueFormatter = PercentFormatter()
-
-        pieCharView.data = PieChartData(dataSet: dataSet)
     }
 
     // MARK: - Card Styling
