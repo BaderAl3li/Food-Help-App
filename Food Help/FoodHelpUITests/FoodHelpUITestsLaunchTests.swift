@@ -1,13 +1,13 @@
 //
-//  Food_HelpUITestsLaunchTests.swift
-//  Food HelpUITests
+//  FoodHelpUITestsLaunchTests.swift
+//  FoodHelpUITests
 //
-//  Created by Hamood Hammad on 12/16/25.
+//  Created by BP-36-213-02 on 03/01/2026.
 //
 
 import XCTest
 
-final class Food_HelpUITestsLaunchTests: XCTestCase {
+final class FoodHelpUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
@@ -17,6 +17,7 @@ final class Food_HelpUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()

@@ -1,5 +1,6 @@
 import UIKit
 import DGCharts
+import Firebase
 import FirebaseFirestore
 
 class ViewController: UIViewController {
@@ -127,3 +128,53 @@ class PercentFormatter: ValueFormatter {
     }
 }
 
+
+
+
+
+func fetchMonthlyData(for userID: String, year: Int) {
+    let db = Firestore.firestore()
+    
+    // Reference to the specific user's monthly_stats collection
+    let monthlyStatsRef = db.collection("users").document(userID).collection("monthly_stats")
+    
+    // Query the collection filtered by the year (if needed)
+    monthlyStatsRef
+        .whereField("createdAt", isGreaterThan: Timestamp(date: Calendar.current.date(from: DateComponents(year: year))!)) // Example filter for year
+        .whereField("createdAt", isLessThan: Timestamp(date: Calendar.current.date(from: DateComponents(year: year + 1))!)) // Example filter for next year
+        .getDocuments { snapshot, error in
+            
+            var monthlyTotals = Array(repeating: 0.0, count: 12)  // Array to hold totals for each month
+            
+            // Handle errors or empty snapshots
+            if let error = error {
+                print("Error fetching documents: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found")
+                return
+            }
+            
+            // Process each document in the snapshot
+            for doc in documents {
+                let createdAt = doc["createdAt"] as? Timestamp
+                let total = doc["total"] as? Double ?? 0.0
+                
+                // Extract month from the createdAt timestamp
+                if let createdAt = createdAt {
+                    let calendar = Calendar.current
+                    let month = calendar.component(.month, from: createdAt.dateValue()) // Get the month from the timestamp
+                    
+                    if month >= 1 && month <= 12 {
+                        monthlyTotals[month - 1] += total // Sum the total for each month
+                    }
+                }
+            }
+            
+            // Update the UI on the main thread
+            DispatchQueue.main.async {
+            }
+        }
+}

@@ -1,13 +1,13 @@
 //
-//  Food_HelpUITests.swift
-//  Food HelpUITests
+//  FoodHelpUITests.swift
+//  FoodHelpUITests
 //
-//  Created by Hamood Hammad on 12/16/25.
+//  Created by BP-36-213-02 on 03/01/2026.
 //
 
 import XCTest
 
-final class Food_HelpUITests: XCTestCase {
+final class FoodHelpUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -22,6 +22,7 @@ final class Food_HelpUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    @MainActor
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
@@ -30,12 +31,11 @@ final class Food_HelpUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    @MainActor
     func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        // This measures how long it takes to launch your application.
+        measure(metrics: [XCTApplicationLaunchMetric()]) {
+            XCUIApplication().launch()
         }
     }
 }

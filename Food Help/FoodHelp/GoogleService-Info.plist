@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.newApp.Food-Help</string>
+	<string>com.newApp.Food-HelpAqeel</string>
 	<key>PROJECT_ID</key>
 	<string>food-help-6f7ec</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:774601531784:ios:7b82fd72378a3ee2905a3d</string>
+	<string>1:774601531784:ios:aa4285b0ebec6c1b905a3d</string>
 </dict>
 </plist>
